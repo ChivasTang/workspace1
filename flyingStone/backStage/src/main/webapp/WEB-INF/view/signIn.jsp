@@ -25,7 +25,7 @@
     <title>login | FlyingStone</title>
     <base href="https://www.flying-stone.com/" type="admin">
 
-    <link type="text/css" rel="stylesheet" href="<c:url value="/lib/ikki2000/dist/css/fontawesome-all.min.css" />" media="all"/>
+<%--    <link type="text/css" rel="stylesheet" href="<c:url value="/lib/ikki2000/dist/css/fontawesome-all.min.css" />" media="all"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/lib/bootstrap/dist/css/bootstrap.min.css" />" media="all"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/lib/ikki2000/dist/css/themes/theme_default.min.css" />" media="all"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/lib/ikki2000/dist/css/amikoko.admin.css" />" media="all"/>
@@ -35,8 +35,8 @@
     <script type="text/javascript" src="<c:url value="/lib/kendo/dist/js/cultures/kendo.culture.ja.min.js" />" charset="UTF-8"></script>
     <script type="text/javascript" src="<c:url value="/lib/ikki2000/dist/js/ikki.js" />" charset="UTF-8"></script>
 
-    <script type="text/javascript" src="<c:url value="/js/admin/login.js" />" charset="UTF-8"></script>
-    <link rel="icon" type="image/png" href="<c:url value="/lib/ikki2000/dist/img/favicon.png" />">
+    <script type="text/javascript" src="<c:url value="/js/signIn.js" />" charset="UTF-8"></script>
+    <link rel="icon" type="image/png" href="<c:url value="/lib/ikki2000/dist/img/favicon.png" />">--%>
 </head>
 <body id="login">
 <main>
@@ -80,6 +80,6 @@
         </form>
     </div>
 </main>
-<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+<%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
 </body>
 </html>

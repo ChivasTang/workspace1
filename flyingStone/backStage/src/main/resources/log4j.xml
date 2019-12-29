@@ -9,7 +9,7 @@
     </appender>
 
     <appender name="DAILY-debug" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="/Users/tsk/Desktop/workspace/flyingStone-log/backStage-debug" />
+        <param name="File" value="/Users/tsk/Desktop/workspace/flyingStone/flyingStone-log/backStage-debug" />
         <param name="Append" value="true" />
         <param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
         <layout class="org.apache.log4j.PatternLayout">

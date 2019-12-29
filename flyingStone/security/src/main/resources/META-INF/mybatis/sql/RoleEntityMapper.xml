@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flyingStone.security.dao.RoleEntityMapper">
+  <resultMap id="BaseResultMap" type="com.flyingStone.security.domain.entity.RoleEntity">
+    <id column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+    <result column="locked" jdbcType="BIT" property="locked" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_id, role, role_name, create_user, created, update_user, updated, locked
+  </sql>
+  <select id="selectByUserId" parameterType="java.lang.Long" resultMap="com.flyingStone.security.domain.entity.RoleEntity">
+    SELECT
+      rur.role_id
+    ,mr.role
+    ,mr.role_name
+    , mr.create_user
+    , mr.created
+    , mr.update_user
+    , mr.updated
+    , mr.locked
+    FROM r_user_role rur
+    LEFT JOIN m_role mr ON rur.role_id=mr.role_id
+    WHERE rur.user_id=#{userId}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from m_role
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from m_role
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.flyingStone.security.domain.entity.RoleEntity">
+    insert into m_role (role_id, role, role_name, 
+      create_user, created, update_user, 
+      updated, locked)
+    values (#{roleId,jdbcType=BIGINT}, #{role,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updated,jdbcType=TIMESTAMP}, #{locked,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.flyingStone.security.domain.entity.RoleEntity">
+    insert into m_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updated != null">
+        updated,
+      </if>
+      <if test="locked != null">
+        locked,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="locked != null">
+        #{locked,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.flyingStone.security.domain.entity.RoleEntity">
+    update m_role
+    <set>
+      <if test="role != null">
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updated != null">
+        updated = #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="locked != null">
+        locked = #{locked,jdbcType=BIT},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.flyingStone.security.domain.entity.RoleEntity">
+    update m_role
+    set role = #{role,jdbcType=VARCHAR},
+      role_name = #{roleName,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      updated = #{updated,jdbcType=TIMESTAMP},
+      locked = #{locked,jdbcType=BIT}
+    where role_id = #{roleId,jdbcType=BIGINT}
+  </update>
+</mapper>

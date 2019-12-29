@@ -15,11 +15,11 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <spring>5.2.1.RELEASE</spring>
+        <spring>5.2.0.RELEASE</spring>
         <spring.batch>4.2.0.RELEASE</spring.batch>
         <spring.data.redis>2.2.3.RELEASE</spring.data.redis>
         <jedis>3.1.0</jedis>
-        <spring.security>5.2.1.RELEASE</spring.security>
+        <spring.security>5.2.0.RELEASE</spring.security>
         <jjwt>0.9.1</jjwt>
         <mybatis>3.5.3</mybatis>
         <mybatis.spring>2.0.3</mybatis.spring>
