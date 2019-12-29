@@ -10,7 +10,6 @@
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
     <artifactId>core</artifactId>
-    <version>1.0</version>
     <packaging>jar</packaging>
     <description>Core Module</description>
 

@@ -6,17 +6,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
     @GetMapping("/signIn")
-    public String signIn(@RequestParam(name="error",required=false)String error, @RequestParam(name="logout",required=false)String logout, ModelMap model){
+    public ModelAndView signIn(@RequestParam(name="error",required=false)String error, @RequestParam(name="logout",required=false)String logout, ModelMap model){
+    	ModelAndView mv=new ModelAndView("signIn");
         if (error != null) {
-            model.put("error", "Username or password is not correct");
+        	mv.addObject("error", "Username or password is not correct");
         } else if (logout != null) {
-            model.put("logout", "Logout successful");
+        	mv.addObject("logout", "Logout successful");
         }
-        return "signIn";
+        return mv;
     }
 
     @RequestMapping("/denied")

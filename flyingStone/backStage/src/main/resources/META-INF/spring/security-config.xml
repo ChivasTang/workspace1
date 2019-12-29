@@ -8,10 +8,12 @@
         http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
     <description>SpringSecurity設定ファイル</description>
     <import resource="app-config.xml"/>
-    <security:http security="none" pattern="**/WEB-INF/static/**/**" />
-    <security:http auto-config="false">
-        <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY"/>
-        <security:intercept-url pattern="/signIn" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+    <security:http security="none" pattern="/signIn" />
+    <security:http security="none" pattern="/WEB-INF/static/**/**" />
+    <security:http use-expressions="true" auto-config="false" authentication-manager-ref="authenticationManager">
+        <security:intercept-url pattern="/**" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/WEB-INF/static/**/**" access="permitAll()"/>
+        <security:intercept-url pattern="/signIn" access="permitAll()"/>
         <security:form-login login-page="/signIn"
                              login-processing-url="/signIn"
                              default-target-url="/"
@@ -20,17 +22,19 @@
                              password-parameter="password"/>
         <security:logout logout-success-url="/signIn?logout"/>
         <security:access-denied-handler error-page="/denied" />
-        <security:csrf disabled="true"/>
+        <security:csrf />
     </security:http>
 
-    <security:authentication-manager>
-        <security:authentication-provider>
-            <security:user-service>
-                <security:user name="admin" password="{noop}admin" authorities="ROLE_ADMIN"/>
-                <security:user name="user" password="{noop}user" authorities="ROLE_USER"/>
-            </security:user-service>
-        </security:authentication-provider>
-    </security:authentication-manager>
+    <!-- 認証処理本体 -->
+    <bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">
+        <constructor-arg>
+            <list>
+                <bean class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+                    <property name="userDetailsService" ref="userDetailsService"/>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
 
     <bean id="userDetailsService" class="com.flyingStone.security.service.impl.UserDetailsServiceImpl"/>
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
