@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flyingStone.security.dao.RoleDao">
+    <sql id="Base_Column_List">
+        ROLE_ID, ROLE, ROLE_NAME, DESCRIPTION, CREATE_USER, CREATED, UPDATE_USER, UPDATED,
+        LOCKED
+    </sql>
+
+    <select id="selectByUserId" parameterType="java.lang.Long"
+            resultType="com.flyingStone.security.domain.entity.RoleEntity">
+        SELECT
+        mr.ROLE_ID
+        , mr.ROLE
+        , mr.ROLE_NAME
+        , mr.DESCRIPTION
+        , mr.CREATE_USER
+        , mr.CREATED
+        , mr.UPDATE_USER
+        , mr.UPDATED
+        , mr.LOCKED
+        FROM R_USER_ROLES rur LEFT JOIN M_ROLE mr ON rur.ROLE_ID=mr.ROLE_ID
+        WHERE rur.USER_ID=#{userId}
+        AND rur.locked=0
+        AND mr.locked=0
+    </select>
+</mapper>

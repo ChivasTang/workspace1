@@ -1,7 +1,7 @@
 package com.flyingStone.security.service.impl;
 
-import com.flyingStone.security.dao.RoleEntityMapper;
-import com.flyingStone.security.dao.UserEntityMapper;
+import com.flyingStone.security.dao.RoleDao;
+import com.flyingStone.security.dao.UserDao;
 import com.flyingStone.security.domain.entity.RoleEntity;
 import com.flyingStone.security.domain.entity.UserEntity;
 import org.slf4j.Logger;
@@ -24,19 +24,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Resource
+    private UserDao userDao;
+
+    @Resource
+    private RoleDao roleDao;
+
+    @Resource
     private PasswordEncoder passwordEncoder;
 
-    @Resource
-    private UserEntityMapper userEntityMapper;
-
-    @Resource
-    private RoleEntityMapper roleEntityMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         logger.debug("--Start-- "+getClass().getName());
-        UserEntity userEntity=userEntityMapper.selectByUsername(username);
-        List<RoleEntity> roleEntities=roleEntityMapper.selectByUserId(userEntity.getUserId());
+        UserEntity userEntity=userDao.selectByUsername(username);
+        List<RoleEntity> roleEntities=roleDao.selectByUserId(userEntity.getUserId());
 
         logger.debug("ログインユーザは、"+username);
         String encodedPassword=passwordEncoder.encode(userEntity.getPassword());

@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @Setter
 @Getter
 @ToString(callSuper = true)
@@ -14,5 +13,7 @@ public class RoleEntity {
     private String role;
 
     private String roleName;
+
+    private String description;
 
 }

@@ -17,6 +17,11 @@
         </layout>
     </appender>
 
+	<logger name="com.flyingStone" additivity="false">
+        <priority value ="info"/>
+        <appender-ref ref="DAILY-debug" />
+    </logger>
+    
     <!-- 根logger的设置-->
     <root>
         <priority value ="debug"/>

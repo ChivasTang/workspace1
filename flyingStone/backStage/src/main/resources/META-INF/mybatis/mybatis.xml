@@ -17,6 +17,10 @@
     </typeHandlers>
 
     <mappers>
-        <!--<mapper resource="META-INF/mybatis/sql/UserRolesMapper.xml"/>-->
+        <mapper resource="META-INF/mybatis/sql/PermissionMapper.xml"/>
+        <mapper resource="META-INF/mybatis/sql/RoleMapper.xml"/>
+        <mapper resource="META-INF/mybatis/sql/RolePermissionsMapper.xml"/>
+        <mapper resource="META-INF/mybatis/sql/UseMapper.xml"/>
+        <mapper resource="META-INF/mybatis/sql/UserRolesMapper.xml"/>
     </mappers>
 </configuration>

@@ -22,5 +22,5 @@ public class ParentEntity {
 
     private Date updated;
 
-    private Boolean locked;
+    private Short locked;
 }

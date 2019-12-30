@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @Setter
 @Getter
 @ToString(callSuper = true)
@@ -13,6 +12,8 @@ public class PermissionEntity {
 
     private String permissionName;
 
-    private String permissionCode;
+    private String description;
+
+    private String link;
 
 }
