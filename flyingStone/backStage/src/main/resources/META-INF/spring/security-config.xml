@@ -8,33 +8,30 @@
         http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
     <description>SpringSecurity設定ファイル</description>
     <import resource="app-config.xml"/>
-    <security:http security="none" pattern="/signIn" />
+    <security:http security="none" pattern="/admin/login" />
     <security:http security="none" pattern="/WEB-INF/static/**/**" />
     <security:http use-expressions="true" auto-config="false" authentication-manager-ref="authenticationManager">
-        <security:intercept-url pattern="/**" access="isAuthenticated()"/>
         <security:intercept-url pattern="/WEB-INF/static/**/**" access="permitAll()"/>
-        <security:intercept-url pattern="/signIn" access="permitAll()"/>
-        <security:form-login login-page="/signIn"
-                             login-processing-url="/signIn"
-                             default-target-url="/"
-                             authentication-failure-url="/signIn?error"
+        <security:intercept-url pattern="/**" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/admin/login" access="permitAll()"/>
+        <security:intercept-url pattern="/login" access="permitAll()"/>
+        <security:form-login 
+                             login-processing-url="/login"
+                             authentication-failure-url="/login?error"
                              username-parameter="username"
                              password-parameter="password"/>
-        <security:logout logout-success-url="/signIn?logout"/>
+        <security:logout logout-success-url="/login?logout" invalidate-session="true" delete-cookies="JSESSIONID"/>
         <security:access-denied-handler error-page="/denied" />
         <security:csrf />
     </security:http>
 
     <!-- 認証処理本体 -->
-    <bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">
-        <constructor-arg>
-            <list>
-                <bean class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
-                    <property name="userDetailsService" ref="userDetailsService"/>
-                </bean>
-            </list>
-        </constructor-arg>
-    </bean>
+    <security:authentication-manager alias="authenticationManager" erase-credentials="false">
+        <security:authentication-provider user-service-ref="userDetailsService">
+            <!-- パスワードデフォルト処理 -->
+            <security:password-encoder ref="passwordEncoder"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
 
     <bean id="userDetailsService" class="com.flyingStone.security.service.impl.UserDetailsServiceImpl"/>
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">

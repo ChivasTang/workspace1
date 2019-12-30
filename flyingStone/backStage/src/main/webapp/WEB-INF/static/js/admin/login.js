@@ -1,6 +1,6 @@
 $.ajaxSetup({cache: false});
 
-var signInLoader = (function () {
+var loginLoader = (function () {
     var setFun = {
 
         pageReady: function () {
@@ -12,5 +12,5 @@ var signInLoader = (function () {
 })();
 
 $(function () {
-	signInLoader.setFun.pageReady();
+    loginLoader.setFun.pageReady();
 });
