@@ -19,7 +19,7 @@
 </head>
 <body>
 <h1>Login | FlyingStone</h1>
-<form name='loginForm' action="login" method='POST'>
+<form name='loginForm' action="../login" method='POST'>
     <table>
         <tr>
             <td>User:</td>
