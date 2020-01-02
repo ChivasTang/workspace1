@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.flyingStone.security.dao.UserDao">
+<mapper namespace="com.flyingStone.core.dao.UserDao">
     <sql id="Base_Column_List">
         USER_ID, USERNAME, EMAIL, PASSWORD, FIRST_NAME, LAST_NAME, BIRTHDAY, CREATE_USER,
         CREATED, UPDATE_USER, UPDATED, LOCKED
     </sql>
     <select id="selectByUsername" parameterType="java.lang.String"
-            resultType="com.flyingStone.security.domain.entity.UserEntity">
+            resultType="com.flyingStone.core.entity.UserEntity">
         SELECT
         <include refid="Base_Column_List"/>
         FROM M_USER

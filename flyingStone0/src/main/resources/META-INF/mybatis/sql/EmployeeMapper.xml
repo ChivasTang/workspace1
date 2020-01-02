@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flyingStone.core.dao.EmployeeDao">
+	<select id="selectAll" 
+	resultType="com.flyingStone.core.domain.entity.EmployeeEntity">
+		SELECT 
+		EMPNO
+		,ENAME AS NAME
+		,JOB
+		,MGR
+		,HIREDATE
+		,SAL
+		FROM EMP
+		ORDER BY ENAME ASC
+	</select>
+</mapper>

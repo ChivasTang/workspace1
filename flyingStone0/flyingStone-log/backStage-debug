@@ -1,0 +1,43 @@
+[0102 18:06:01 045 DEBUG] [Worker-3: Launching flyingStone-generatorConfig.xml] ant.logging.AntLogFactory - Logging initialized using 'org.mybatis.generator.eclipse.ui.ant.logging.slf4j.Slf4jLoggingLogFactory@27a575eb' adapter.
+[0102 18:06:01 111 DEBUG] [Worker-3: Launching flyingStone-generatorConfig.xml] generator.logging.LogFactory - Logging initialized using 'org.mybatis.generator.eclipse.ui.ant.logging.AntLogFactory@41d9b3ce' adapter.
+[0102 18:06:42 177 DEBUG] [Worker-17: Launching flyingStone-generatorConfig.xml] ant.logging.AntLogFactory - Logging initialized using 'org.mybatis.generator.eclipse.ui.ant.logging.slf4j.Slf4jLoggingLogFactory@4871c94e' adapter.
+[0102 18:06:42 210 DEBUG] [Worker-17: Launching flyingStone-generatorConfig.xml] generator.logging.LogFactory - Logging initialized using 'org.mybatis.generator.eclipse.ui.ant.logging.AntLogFactory@76392235' adapter.
+[0102 18:07:32 854 DEBUG] [Worker-17: Launching flyingStone-generatorConfig.xml] ant.logging.AntLogFactory - Logging initialized using 'org.mybatis.generator.eclipse.ui.ant.logging.slf4j.Slf4jLoggingLogFactory@7062dcee' adapter.
+[0102 18:07:32 868 DEBUG] [Worker-17: Launching flyingStone-generatorConfig.xml] generator.logging.LogFactory - Logging initialized using 'org.mybatis.generator.eclipse.ui.ant.logging.AntLogFactory@74567422' adapter.
+[0102 18:07:34 204 DEBUG] [Worker-17: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Retrieving column information for table "C##FLYSTONE.EMP"
+[0102 18:09:24 309 DEBUG] [Worker-17: Launching flyingStone-generatorConfig.xml] ant.logging.AntLogFactory - Logging initialized using 'org.mybatis.generator.eclipse.ui.ant.logging.slf4j.Slf4jLoggingLogFactory@6f810de9' adapter.
+[0102 18:09:24 319 DEBUG] [Worker-17: Launching flyingStone-generatorConfig.xml] generator.logging.LogFactory - Logging initialized using 'org.mybatis.generator.eclipse.ui.ant.logging.AntLogFactory@1e97d36d' adapter.
+[0102 18:09:25 332 DEBUG] [Worker-17: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Retrieving column information for table "C##FLYSTONE.EMP"
+[0102 18:09:47 017 DEBUG] [Worker-2: Launching flyingStone-generatorConfig.xml] ant.logging.AntLogFactory - Logging initialized using 'org.mybatis.generator.eclipse.ui.ant.logging.slf4j.Slf4jLoggingLogFactory@436414d5' adapter.
+[0102 18:09:47 028 DEBUG] [Worker-2: Launching flyingStone-generatorConfig.xml] generator.logging.LogFactory - Logging initialized using 'org.mybatis.generator.eclipse.ui.ant.logging.AntLogFactory@549749b3' adapter.
+[0102 18:09:48 215 DEBUG] [Worker-2: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Retrieving column information for table "FLYSTONE.EMP"
+[0102 18:09:49 338 DEBUG] [Worker-2: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "EMPNO", data type 2, in table "FLYSTONE.EMP"
+[0102 18:09:49 339 DEBUG] [Worker-2: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "ENAME", data type 12, in table "FLYSTONE.EMP"
+[0102 18:09:49 339 DEBUG] [Worker-2: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "JOB", data type 12, in table "FLYSTONE.EMP"
+[0102 18:09:49 339 DEBUG] [Worker-2: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "MGR", data type 2, in table "FLYSTONE.EMP"
+[0102 18:09:49 339 DEBUG] [Worker-2: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "HIREDATE", data type 93, in table "FLYSTONE.EMP"
+[0102 18:09:49 340 DEBUG] [Worker-2: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "SAL", data type 2, in table "FLYSTONE.EMP"
+[0102 18:09:49 340 DEBUG] [Worker-2: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "COMM", data type 2, in table "FLYSTONE.EMP"
+[0102 18:09:49 340 DEBUG] [Worker-2: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "DEPTNO", data type 2, in table "FLYSTONE.EMP"
+[0102 18:11:01 505 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] ant.logging.AntLogFactory - Logging initialized using 'org.mybatis.generator.eclipse.ui.ant.logging.slf4j.Slf4jLoggingLogFactory@2b0dab7e' adapter.
+[0102 18:11:01 518 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] generator.logging.LogFactory - Logging initialized using 'org.mybatis.generator.eclipse.ui.ant.logging.AntLogFactory@23209ccd' adapter.
+[0102 18:11:02 859 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Retrieving column information for table "FLYSTONE.EMP"
+[0102 18:11:03 778 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "EMPNO", data type 2, in table "FLYSTONE.EMP"
+[0102 18:11:03 779 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "ENAME", data type 12, in table "FLYSTONE.EMP"
+[0102 18:11:03 779 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "JOB", data type 12, in table "FLYSTONE.EMP"
+[0102 18:11:03 779 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "MGR", data type 2, in table "FLYSTONE.EMP"
+[0102 18:11:03 779 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "HIREDATE", data type 93, in table "FLYSTONE.EMP"
+[0102 18:11:03 779 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "SAL", data type 2, in table "FLYSTONE.EMP"
+[0102 18:11:03 780 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "COMM", data type 2, in table "FLYSTONE.EMP"
+[0102 18:11:03 781 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "DEPTNO", data type 2, in table "FLYSTONE.EMP"
+[0102 18:12:01 546 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] ant.logging.AntLogFactory - Logging initialized using 'org.mybatis.generator.eclipse.ui.ant.logging.slf4j.Slf4jLoggingLogFactory@568e8b8e' adapter.
+[0102 18:12:01 560 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] generator.logging.LogFactory - Logging initialized using 'org.mybatis.generator.eclipse.ui.ant.logging.AntLogFactory@29b82338' adapter.
+[0102 18:12:02 582 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Retrieving column information for table "FLYSTONE.EMP"
+[0102 18:12:03 571 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "EMPNO", data type 2, in table "FLYSTONE.EMP"
+[0102 18:12:03 571 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "ENAME", data type 12, in table "FLYSTONE.EMP"
+[0102 18:12:03 572 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "JOB", data type 12, in table "FLYSTONE.EMP"
+[0102 18:12:03 572 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "MGR", data type 2, in table "FLYSTONE.EMP"
+[0102 18:12:03 572 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "HIREDATE", data type 93, in table "FLYSTONE.EMP"
+[0102 18:12:03 572 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "SAL", data type 2, in table "FLYSTONE.EMP"
+[0102 18:12:03 573 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "COMM", data type 2, in table "FLYSTONE.EMP"
+[0102 18:12:03 573 DEBUG] [Worker-16: Launching flyingStone-generatorConfig.xml] internal.db.DatabaseIntrospector - Found column "DEPTNO", data type 2, in table "FLYSTONE.EMP"
