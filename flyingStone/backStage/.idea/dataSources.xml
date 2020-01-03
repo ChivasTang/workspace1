@@ -9,5 +9,12 @@
       <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
       <jdbc-url>jdbc:oracle:thin:@192.168.3.9:1521:XE</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="@192.168.3.29" uuid="d1fa9b1b-6d42-4996-9eb5-86275598a035">
+      <driver-ref>oracle</driver-ref>
+      <synchronize>true</synchronize>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@192.168.3.29:1521:XE</jdbc-url>
+    </data-source>
   </component>
 </project>

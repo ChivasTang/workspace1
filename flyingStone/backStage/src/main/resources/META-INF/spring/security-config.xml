@@ -8,23 +8,27 @@
         http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
     <description>セキュリティ設定</description>
 
-    <security:http security="none" pattern="/login" />
-    <security:http security="none" pattern="/admin/login" />
-    <security:http security="none" pattern="/admin/register" />
     <security:http auto-config="false" use-expressions="true">
         <security:intercept-url pattern="/login" access="permitAll()" />
         <security:intercept-url pattern="/admin/login" access="permitAll()" />
         <security:intercept-url pattern="/admin/register" access="permitAll()" />
+        <security:intercept-url pattern="/admin/denied" access="permitAll()" />
         <security:intercept-url pattern="/**" access="isAuthenticated()"/>
 
-        <security:form-login login-page="/admin/login" login-processing-url="/login" default-target-url="/admin/login" authentication-failure-url="/admin/login?error=true"/>
-        <security:logout logout-url="/admin/login" logout-success-url="/admin/login" invalidate-session="true" delete-cookies="JSESSIONID" />
+        <security:form-login login-page="/admin/login"
+                             login-processing-url="/login"
+                             default-target-url="/admin/login"
+                             authentication-failure-url="/admin/login?error=true"/>
+        <security:logout logout-url="/admin/logout"
+                         logout-success-url="/admin/logout"
+                         invalidate-session="true"
+                         delete-cookies="JSESSIONID" />
         <security:csrf />
     </security:http>
     <security:authentication-manager alias="authenticationManager">
         <security:authentication-provider>
             <security:user-service>
-                <security:user name="user" password="password" authorities="ROLE_USER" />
+                <security:user name="user" password="user" authorities="ROLE_USER" />
             </security:user-service>
             <security:password-encoder ref="passwordEncoder" />
         </security:authentication-provider>

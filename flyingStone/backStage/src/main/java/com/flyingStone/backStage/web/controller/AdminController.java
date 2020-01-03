@@ -16,13 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminController {
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public ModelAndView login(HttpServletRequest request, HttpServletResponse response){
+    public ModelAndView login(HttpServletRequest request, HttpServletResponse response,Model model){
         return new ModelAndView("admin/login");
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public void login(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception{
-        String token="flyingStoneTokenSecretKey";
-
-    }
 }
