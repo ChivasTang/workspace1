@@ -1,26 +1,21 @@
-package com.flyingStone.core.entity;
-
+package com.flyingStone.core.domain;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
 
-/**
- * テーブルの通用フィールド
- */
 @Setter
 @Getter
 @ToString(callSuper = true)
-public class ParentEntity {
-
+public class ParentDomain {
     private String createUser;
 
-    private Date created;
+    private Date createDate;
 
     private String updateUser;
 
-    private Date updated;
+    private Date updateDate;
 
-    private Short locked;
+    private Boolean delKbn;
 }

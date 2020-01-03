@@ -31,10 +31,10 @@ CREATE TABLE flyingStone.t_permission (
     permission_name VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT 'ログイン可能名',
     permission_code VARCHAR(255) NOT NULL COMMENT 'ログイン可能コード',
     create_user VARCHAR(255) NOT NULL COMMENT '作成ユーザ',
-    created     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP COMMENT '作成日付',
+    create_date     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP COMMENT '作成日付',
     update_user VARCHAR(255) DEFAULT NULL COMMENT '更新ユーザ',
-    updated     TIMESTAMP    DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日付',
-    locked   TINYINT(1)   DEFAULT 0 COMMENT '有効区分',
+    update_date     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日付',
+    del_kbn   TINYINT(1)   DEFAULT 0 COMMENT '有効区分',
     PRIMARY KEY (permission_id)
 )
     ENGINE = InnoDB
@@ -65,10 +65,10 @@ CREATE TABLE flyingStone.m_role (
     role VARCHAR(255) NOT NULL COMMENT 'ロール名',
     role_name VARCHAR(255) NOT NULL COMMENT 'ロール名',
     create_user VARCHAR(255) NOT NULL COMMENT '作成ユーザ',
-    created     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP COMMENT '作成日付',
+    create_date     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP COMMENT '作成日付',
     update_user VARCHAR(255) DEFAULT NULL COMMENT '更新ユーザ',
-    updated     TIMESTAMP    DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日付',
-    locked   TINYINT(1)   DEFAULT 0 COMMENT '有効区分',
+    update_date     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日付',
+    del_kbn   TINYINT(1)   DEFAULT 0 COMMENT '有効区分',
     PRIMARY KEY (role_id)
 )
     ENGINE = InnoDB
@@ -89,20 +89,20 @@ UNLOCK TABLES;
 
 
 -- -----------------------------------------------------
--- Table flyingStone.r_role_permission
+-- Table flyingStone.r_role_permissions
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS flyingStone.r_role_permission;
+DROP TABLE IF EXISTS flyingStone.r_role_permissions;
 /*!40101 SET @saved_cs_client = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE flyingStone.r_role_permission (
+CREATE TABLE flyingStone.r_role_permissions (
     id BIGINT NOT NULL AUTO_INCREMENT,
     role_id BIGINT NOT NULL,
     permission_id BIGINT NOT NULL,
     create_user VARCHAR(255) NOT NULL COMMENT '作成ユーザ',
-    created     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP COMMENT '作成日付',
+    create_date     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP COMMENT '作成日付',
     update_user VARCHAR(255) DEFAULT NULL COMMENT '更新ユーザ',
-    updated     TIMESTAMP    DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日付',
-    locked   TINYINT(1)   DEFAULT 0 COMMENT '有効区分',
+    update_date     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日付',
+    del_kbn   TINYINT(1)   DEFAULT 0 COMMENT '有効区分',
     PRIMARY KEY (id)
 )
     ENGINE = InnoDB
@@ -113,10 +113,10 @@ CREATE TABLE flyingStone.r_role_permission (
 
 -- Dumping data for table flyingStone.t_permission
 
-LOCK TABLES flyingStone.r_role_permission WRITE;
-/*!40000 ALTER TABLE flyingStone.r_role_permission DISABLE KEYS */;
-insert  into flyingStone.r_role_permission(id, role_id, permission_id, create_user) values (1,1,1,'tangzh1983');
-/*!40000 ALTER TABLE flyingStone.r_role_permission ENABLE KEYS */;
+LOCK TABLES flyingStone.r_role_permissions WRITE;
+/*!40000 ALTER TABLE flyingStone.r_role_permissions DISABLE KEYS */;
+insert  into flyingStone.r_role_permissions(id, role_id, permission_id, create_user) values (1,1,1,'tangzh1983');
+/*!40000 ALTER TABLE flyingStone.r_role_permissions ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE = @OLD_TIME_ZONE */;
 
@@ -137,10 +137,10 @@ CREATE TABLE IF NOT EXISTS flyingStone.m_user
     last_name   VARCHAR(255) NOT NULL COMMENT '苗字',
     birthday    DATE         NOT NULL COMMENT '生年月日',
     create_user VARCHAR(255) NOT NULL COMMENT '作成ユーザ',
-    created     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP COMMENT '作成日付',
+    create_date     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP COMMENT '作成日付',
     update_user VARCHAR(255) DEFAULT NULL COMMENT '更新ユーザ',
-    updated     TIMESTAMP    DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日付',
-    locked   TINYINT(1)   DEFAULT 0 COMMENT '有効区分',
+    update_date     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日付',
+    del_kbn   TINYINT(1)   DEFAULT 0 COMMENT '有効区分',
     PRIMARY KEY (user_id)
 )
     ENGINE = InnoDB
@@ -163,22 +163,22 @@ UNLOCK TABLES;
 
 
 -- -----------------------------------------------------
--- Table flyingStone.r_user_role
+-- Table flyingStone.r_user_roles
 -- -----------------------------------------------------
 
-DROP TABLE IF EXISTS flyingStone.r_user_role;
+DROP TABLE IF EXISTS flyingStone.r_user_roles;
 /*!40101 SET @saved_cs_client = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE IF NOT EXISTS flyingStone.r_user_role
+CREATE TABLE IF NOT EXISTS flyingStone.r_user_roles
 (
     id       BIGINT     NOT NULL AUTO_INCREMENT COMMENT 'ユーザロール区分',
     user_id  BIGINT NOT NULL COMMENT 'ユーザ名',
     role_id BIGINT NOT NULL COMMENT 'ロール名',
     create_user VARCHAR(255) NOT NULL COMMENT '作成ユーザ',
-    created     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP COMMENT '作成日付',
+    create_date     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP COMMENT '作成日付',
     update_user VARCHAR(255) DEFAULT NULL COMMENT '更新ユーザ',
-    updated     TIMESTAMP    DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日付',
-    locked   TINYINT(1)   DEFAULT 0 COMMENT '有効区分',
+    update_date     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日付',
+    del_kbn   TINYINT(1)   DEFAULT 0 COMMENT '有効区分',
     PRIMARY KEY (id)
 )
     ENGINE = InnoDB
@@ -188,12 +188,12 @@ CREATE TABLE IF NOT EXISTS flyingStone.r_user_role
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
--- Dumping data for table flyingStone.r_user_role
+-- Dumping data for table flyingStone.r_user_roles
 
-LOCK TABLES flyingStone.r_user_role WRITE;
-/*!40000 ALTER TABLE flyingStone.r_user_role DISABLE KEYS */;
-INSERT INTO flyingStone.r_user_role (id, user_id, role_id, create_user) VALUES (1, 1,1,'tangzh1983');
-/*!40000 ALTER TABLE flyingStone.r_user_role ENABLE KEYS */;
+LOCK TABLES flyingStone.r_user_roles WRITE;
+/*!40000 ALTER TABLE flyingStone.r_user_roles DISABLE KEYS */;
+INSERT INTO flyingStone.r_user_roles (id, user_id, role_id, create_user) VALUES (1, 1,1,'tangzh1983');
+/*!40000 ALTER TABLE flyingStone.r_user_roles ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE = @OLD_TIME_ZONE */;
 

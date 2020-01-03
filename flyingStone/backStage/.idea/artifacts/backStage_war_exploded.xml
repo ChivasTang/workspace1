@@ -17,13 +17,7 @@
           <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.10" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.5.3" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:2.0.3" />
-          <element id="library" level="project" name="Maven: com.oracle.jdbc:ojdbc8:19.3.0.0" />
-          <element id="library" level="project" name="Maven: com.oracle.ojdbc:ucp:19.3.0.0" />
-          <element id="library" level="project" name="Maven: com.oracle.ojdbc:oraclepki:19.3.0.0" />
-          <element id="library" level="project" name="Maven: com.oracle.ojdbc:osdt_cert:19.3.0.0" />
-          <element id="library" level="project" name="Maven: com.oracle.ojdbc:osdt_core:19.3.0.0" />
-          <element id="library" level="project" name="Maven: com.oracle.ojdbc:simplefan:19.3.0.0" />
-          <element id="library" level="project" name="Maven: com.oracle.ojdbc:ons:19.3.0.0" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.47" />
           <element id="library" level="project" name="Maven: org.springframework:spring-core:5.2.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.2.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-context:5.2.0.RELEASE" />

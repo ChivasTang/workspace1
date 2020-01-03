@@ -1,4 +1,4 @@
-package com.flyingStone.core.entity;
+package com.flyingStone.core.domain.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +8,8 @@ import lombok.ToString;
 @Getter
 @ToString(callSuper = true)
 public class RolePermissionsEntity {
+    private Long id;
+
     private Long roleId;
 
     private Long permissionId;

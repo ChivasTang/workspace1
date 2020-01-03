@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@192.168.3.9" uuid="2bc63ca3-db11-4f2a-b423-629a64473f51">
-      <driver-ref>oracle</driver-ref>
+    <data-source source="LOCAL" name="flyingStone@localhost" uuid="65dc3ab0-093e-4e41-b06a-bd6292044062">
+      <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <remarks>192.168.3.9</remarks>
-      <auto-commit>false</auto-commit>
-      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
-      <jdbc-url>jdbc:oracle:thin:@192.168.3.9:1521:XE</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="@192.168.3.29" uuid="d1fa9b1b-6d42-4996-9eb5-86275598a035">
-      <driver-ref>oracle</driver-ref>
-      <synchronize>true</synchronize>
-      <auto-commit>false</auto-commit>
-      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
-      <jdbc-url>jdbc:oracle:thin:@192.168.3.29:1521:XE</jdbc-url>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/flyingStone?useUnicode=true&amp;characterEncoding=utf8</jdbc-url>
     </data-source>
   </component>
 </project>

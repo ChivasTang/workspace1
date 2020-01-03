@@ -6,6 +6,7 @@
 <generatorConfiguration>
     <!-- 配置mysql 驱动jar包路径.用了绝对路径 -->
    <!-- <classPathEntry location="/Users/tsk/.m2/repository/com/oracle/jdbc/ojdbc8/19.3.0.0/ojdbc8-19.3.0.0.jar" />-->
+    <classPathEntry location="/Users/tsk/.m2/repository/com/oracle/jdbc/ojdbc8/19.3.0.0/ojdbc8-19.3.0.0.jar" />
 
     <context id="DB2Mapper" targetRuntime="MyBatis3">
         <!-- 防止生成的代码中有很多注释，加入下面的配置控制 -->
@@ -15,10 +16,10 @@
         </commentGenerator>
 
         <!-- 数据库连接 -->
-        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
-                        connectionURL="jdbc:oracle:thin:@192.168.3.9:1521:XE"
-                        userId="C##flyingstone"
-                        password="flyingstone">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/flyingStone?characterEncoding=utf8"
+                        userId="root"
+                        password="root">
         </jdbcConnection>
 
         <javaTypeResolver >
@@ -26,7 +27,7 @@
         </javaTypeResolver>
 
         <!-- 数据表对应的model层  -->
-        <javaModelGenerator targetPackage="com.flyingStone.security.domain.entity" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.flyingStone.core.domain.entity" targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
@@ -37,32 +38,32 @@
         </sqlMapGenerator>
 
         <!-- mybatis3中的mapper接口 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.flyingStone.security.dao"  targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.flyingStone.core.dao"  targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
         <!-- 数据表进行生成操作 schema:相当于库名; tableName:表名; domainObjectName:对应的DO -->
-        <table schema="C##flyingstone" tableName="m_user" domainObjectName="UserEntity"
+        <table schema="flyingStone" tableName="m_user" domainObjectName="UserEntity"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table schema="C##flyingstone" tableName="m_role" domainObjectName="RoleEntity"
+        <table schema="flyingStone" tableName="m_role" domainObjectName="RoleEntity"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table schema="C##flyingstone" tableName="r_user_roles" domainObjectName="UserRoleEntity"
+        <table schema="flyingStone" tableName="r_user_roles" domainObjectName="UserRolesEntity"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table schema="C##flyingstone" tableName="m_permission" domainObjectName="PermissionEntity"
+        <table schema="flyingStone" tableName="t_permission" domainObjectName="PermissionEntity"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table schema="C##flyingstone" tableName="r_role_permissions" domainObjectName="RolePermissionEntity"
+        <table schema="flyingStone" tableName="r_role_permissions" domainObjectName="RolePermissionsEntity"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

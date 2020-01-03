@@ -77,19 +77,19 @@
             <version>${mybatis.spring}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.oracle.jdbc/ojdbc6 -->
+<!--        <dependency>-->
+<!--            <groupId>com.oracle.jdbc</groupId>-->
+<!--            <artifactId>ojdbc8</artifactId>-->
+<!--            <version>${oracle.driver}</version>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
+        <!--mysql -->
         <dependency>
-            <groupId>com.oracle.jdbc</groupId>
-            <artifactId>ojdbc8</artifactId>
-            <version>${oracle.driver}</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql}</version>
             <scope>runtime</scope>
         </dependency>
-        <!--mysql -->
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-        <!-- 		<dependency>
-                    <groupId>mysql</groupId>
-                    <artifactId>mysql-connector-java</artifactId>
-                    <version>${mysql}</version>
-                </dependency> -->
         <!-- spring-mvc -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -358,10 +358,15 @@
                 <version>${mybatis.generator}</version>
                 <dependencies>
                     <dependency>
-                        <groupId>com.oracle.jdbc</groupId>
-                        <artifactId>ojdbc8</artifactId>
-                        <version>${oracle.driver}</version>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql}</version>
                     </dependency>
+<!--                    <dependency>-->
+<!--                        <groupId>com.oracle.jdbc</groupId>-->
+<!--                        <artifactId>ojdbc8</artifactId>-->
+<!--                        <version>${oracle.driver}</version>-->
+<!--                    </dependency>-->
                 </dependencies>
                 <configuration>
                     <overwrite>true</overwrite>

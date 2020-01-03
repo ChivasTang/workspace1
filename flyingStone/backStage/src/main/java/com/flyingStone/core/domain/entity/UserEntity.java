@@ -1,4 +1,4 @@
-package com.flyingStone.core.entity;
+package com.flyingStone.core.domain.entity;
 
 import lombok.Getter;
 import lombok.Setter;
