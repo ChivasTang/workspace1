@@ -40,6 +40,18 @@
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:5.2.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-taglibs:5.2.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-acl:5.2.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-oauth2-client:5.2.0.RELEASE" />
+          <element id="library" level="project" name="Maven: com.nimbusds:oauth2-oidc-sdk:6.14" />
+          <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.6.1" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+          <element id="library" level="project" name="Maven: com.github.stephenc.jcip:jcip-annotations:1.0-1" />
+          <element id="library" level="project" name="Maven: net.minidev:json-smart:2.3" />
+          <element id="library" level="project" name="Maven: net.minidev:accessors-smart:1.2" />
+          <element id="library" level="project" name="Maven: org.ow2.asm:asm:5.0.4" />
+          <element id="library" level="project" name="Maven: com.nimbusds:lang-tag:1.4.4" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-oauth2-core:5.2.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-oauth2-jose:5.2.0.RELEASE" />
+          <element id="library" level="project" name="Maven: com.nimbusds:nimbus-jose-jwt:7.8" />
           <element id="library" level="project" name="Maven: io.jsonwebtoken:jjwt-api:0.10.5" />
           <element id="library" level="project" name="Maven: io.jsonwebtoken:jjwt-impl:0.10.5" />
           <element id="library" level="project" name="Maven: io.jsonwebtoken:jjwt-jackson:0.10.5" />
