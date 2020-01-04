@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/backStage.iml" filepath="$PROJECT_DIR$/backStage.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../flyingStone-log/flyingStone-log.iml" filepath="$PROJECT_DIR$/../flyingStone-log/flyingStone-log.iml" />
     </modules>
   </component>
 </project>

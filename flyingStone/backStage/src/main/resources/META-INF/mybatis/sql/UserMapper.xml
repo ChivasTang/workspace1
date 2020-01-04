@@ -21,7 +21,7 @@
     </sql>
 
     <select id="selectByUsername" parameterType="com.flyingStone.core.domain.ParamDomain"
-            resultMap="com.flyingStone.core.domain.entity.UserEntity">
+            resultType="com.flyingStone.core.domain.entity.UserEntity">
         SELECT
         <include refid="Base_Column_List"/>
         FROM m_user

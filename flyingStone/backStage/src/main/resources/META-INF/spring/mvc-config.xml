@@ -21,6 +21,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <mvc:resources location="WEB-INF/static/image/" mapping="/image/**/**" />
     <mvc:resources location="WEB-INF/static/i18n/" mapping="/i18n/**/**" />
     <mvc:resources location="WEB-INF/static/lib/" mapping="/lib/**/**" />
+
     <!-- messageSource -->
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basename" value="WEB-INF/static/i18n/MessageSource*.*"/>
@@ -35,6 +36,5 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
         <property name="suffix" value="${spring.viewResolver.suffix}"/>
     </bean>
 
-    <!--<bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper"/>-->
     <import resource="security-config.xml"/>
 </beans>

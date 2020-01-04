@@ -23,5 +23,4 @@ public class UserEntity {
     private String lastName;
 
     private Date birthday;
-
 }

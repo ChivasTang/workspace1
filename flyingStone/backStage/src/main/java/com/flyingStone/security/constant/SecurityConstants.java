@@ -1,19 +1,16 @@
 package com.flyingStone.security.constant;
 
 public class SecurityConstants {
+    public static final String LOGIN_URL = "/admin/login";
+    public static final String REGISTER_URL = "/admin/register";
+    public static final String LOGIN_TYPE = "REDIRECT";
 
-    // Signing key for HS512 algorithm
-    // You can use the page http://www.allkeysgenerator.com/ to generate all kinds of keys
-    public static final String JWT_SECRET = "n2r5u8x/A%D*G-KaPdSgVkYp3s6v9y$B&E(H+MbQeThWmZq4t7w!z%C*F-J@NcRf";
-
-    // JWT token defaults
+    public static final String SECRET = "flyingstonesecretkey";
+    //public static final long EXPIRATION_TIME = 28_800_000;
+    public static final long VALIDATE_HOUR = 24;
     public static final String TOKEN_HEADER = "Authorization";
     public static final String TOKEN_PREFIX = "Bearer ";
     public static final String TOKEN_TYPE = "JWT";
-    public static final String TOKEN_ISSUER = "secure-api";
-    public static final String TOKEN_AUDIENCE = "secure-app";
-    public static final long JWT_TOKEN_VALIDITY = 60 * 60;
-
 
     public SecurityConstants() {
         throw new IllegalStateException("Cannot create instance of static util class");

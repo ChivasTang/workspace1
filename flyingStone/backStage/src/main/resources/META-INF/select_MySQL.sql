@@ -1,6 +1,6 @@
-SELECT username, password FROM m_user;
+SELECT * FROM m_user;
 SELECT * FROM m_role;
-
+SELECT * FROM r_user_roles;
 SELECT
     rur.role_id
      , mr.role

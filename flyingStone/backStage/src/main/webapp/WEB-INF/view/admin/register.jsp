@@ -13,21 +13,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Login | FlyingStone</title>
+    <title>Register | FlyingStone</title>
 </head>
 <body>
-<h1>Login | FlyingStone</h1>
-<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
-    <p style="color: #ff0000">
-        Your login attempt was not successful due to <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>.
-    </p>
-</c:if>
-<form name='loginForm' action="<c:url value='/admin/login' />" method='POST'>
-Username <input type="text" name="username" title="" /><br />
-Password <input type="password" name="password" title="" /><br />
-<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /><br />
-<input type="submit" value="Submit"><br />
-</form>
-<a href="<c:url value='/admin/register' />" type="button" role="button">新規登録</a>
+<h1>Register | FlyingStone</h1>
+ここは、新規登録画面です。
 </body>
 </html>
