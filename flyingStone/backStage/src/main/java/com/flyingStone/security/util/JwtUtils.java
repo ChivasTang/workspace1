@@ -1,19 +1,24 @@
 package com.flyingStone.security.util;
 
 import java.io.Serializable;
-import java.security.Principal;
+import java.time.Instant;
 import java.time.ZonedDateTime;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import com.flyingStone.security.constant.SecurityConstants;
 import com.flyingStone.security.domain.JwtUser;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 public class JwtUtils implements Serializable {
@@ -21,98 +26,178 @@ public class JwtUtils implements Serializable {
     private static final long serialVersionUID = -843431674050899100L;
 
     /**
-     * Tokenを作成
-     *
-     * @param userDetails ユーザ情報
-     * @return Token
+     * Tokenからユーザ情報を取得
+     * @param token token
+     * @return ユーザ情報
      */
-    public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>(2);
-        claims.put(Claims.SUBJECT, userDetails.getUsername());
-        claims.put(Claims.ISSUED_AT, new Date());
-        return generateToken(claims);
+    public JwtUser getJwtUserFromToken(String token){
+        final Claims claims = getClaimsFromToken(token);
+        final Long userId=getUserIdFromToken(token);
+        final String username=claims.getSubject();
+        final String email=getEmailFromToken(token);
+        List<? extends GrantedAuthority> roles= (List<? extends GrantedAuthority>) claims.get(SecurityConstants.CLAIM_KEY_AUTHORITIES);
+        Collection<? extends GrantedAuthority> authorities = parseArrayToAuthorities(roles);
+        return new JwtUser(userId, username, email, null, authorities);
     }
 
+    /**
+     * RolesをAuthoritiesに解析
+     *
+     * @param roles roles
+     * @return authorities
+     */
+    private Collection<? extends GrantedAuthority> parseArrayToAuthorities(List<? extends GrantedAuthority> roles) {
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        SimpleGrantedAuthority authority;
+        for (Object role : roles) {
+            authority = new SimpleGrantedAuthority(role.toString());
+            authorities.add(authority);
+        }
+        return authorities;
+    }
+
+    /**
+     * 認証情報によってTokenを作成
+     *
+     * @param authentication 認証情報
+     * @return Token
+     */
     public String generateToken(Authentication authentication){
-        Principal principal= (Principal) authentication.getPrincipal();
+        JwtUser user= (JwtUser) authentication.getPrincipal();
         return Jwts.builder()
-                .setSubject(principal.getName())
-                .setIssuedAt(new Date())
-                .setExpiration(getExpirationDate())
+                .setSubject(user.getUsername())
+                .setClaims(generateClaims(user))
+                .setIssuedAt(Date.from(Instant.now()))
+                .setExpiration(Date.from(ZonedDateTime.now().plusHours(SecurityConstants.VALIDATE_HOUR).toInstant()))
                 .signWith(SignatureAlgorithm.HS512,SecurityConstants.SECRET)
                 .compact();
     }
 
     /**
+     * ユーザ情報によってTokenを作成
+     *
+     * @param jwtUser JwtUser
+     * @return token
+     */
+    public String generateToken(JwtUser jwtUser) {
+        return Jwts.builder()
+                .setSubject(jwtUser.getUsername())
+                .setClaims(generateClaims(jwtUser))
+                .setIssuedAt(Date.from(Instant.now()))
+                .setExpiration(Date.from(ZonedDateTime.now().plusHours(SecurityConstants.VALIDATE_HOUR).toInstant()))
+                .signWith(SignatureAlgorithm.HS512,SecurityConstants.SECRET)
+                .compact();
+    }
+
+    /**
+     * Tokenからclaimsを取得
+     *
+     * @param token token
+     * @return claims
+     */
+    private Claims getClaimsFromToken(String token){
+        if(token==null){
+            return null;
+        }
+        Claims claims;
+        try {
+            claims = Jwts.parser()
+                    .setSigningKey(SecurityConstants.SECRET)
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (Exception e) {
+            claims = null;
+        }
+        return claims;
+    }
+
+    /**
      * TokenからユーザIdを取得
      *
-     * @param token Token
+     * @param token token
      * @return UserId
      */
-    public Long getUserIdFromJWT(String token){
-        Claims claims = Jwts.parser()
-                .setSigningKey(SecurityConstants.SECRET)
-                .parseClaimsJws(token)
-                .getBody();
-        return Long.parseLong(claims.getSubject());
+    public Long getUserIdFromToken(String token){
+        Claims claims = getClaimsFromToken(token);
+        if(claims==null){
+            //TODO
+            log.error("Tokenが期限切れになりました。");
+            throw new RuntimeException("Tokenが空です。");
+        }
+        return (Long) claims.get(SecurityConstants.CLAIM_KEY_USER_ID);
+    }
+
+    /**
+     * TokenからユーザEmailを取得
+     *
+     * @param token token
+     * @return Email
+     */
+    public String getEmailFromToken(String token){
+        Claims claims = getClaimsFromToken(token);
+        if(claims==null){
+            //TODO
+            log.error("Tokenが期限切れになりました。");
+            throw new RuntimeException("Tokenが空です。");
+        }
+        return (String) claims.get(SecurityConstants.CLAIM_KEY_EMAIL);
     }
 
     /**
      * Tokenからユーザ名を取得
      *
-     * @param token Token
+     * @param token token
      * @return ユーザ名
      */
-    public String getUsernameFromToken(String token) {
-        String username;
-        try {
-            Claims claims = getClaimsFromToken(token);
-            username = claims.getSubject();
-        } catch (Exception e) {
-            username = null;
+    public String getUsernameFromToken(String token){
+        Claims claims = getClaimsFromToken(token);
+        if(claims==null){
+            //TODO
+            log.error("Tokenが期限切れになりました。");
+            throw new RuntimeException("Tokenが空です。");
         }
-        return username;
+        return claims.getSubject();
     }
 
     /**
-     * クレームによってTokenを作成
      *
-     * @param claims クレーム
-     * @return Token
+     * @param token token
+     * @param userDetails userDetails
+     * @return true:有効 false:無効
      */
-    private String generateToken(Map<String, Object> claims) {
-        return Jwts.builder()
-                .setClaims(claims)
-                .setExpiration(getExpirationDate())
-                .signWith(SignatureAlgorithm.HS512, SecurityConstants.SECRET)
-                .compact();
+    public boolean validateToken(String token, UserDetails userDetails){
+        JwtUser user=(JwtUser) userDetails;
+        final long userId = getUserIdFromToken(token);
+        final String username = getUsernameFromToken(token);
+        return userId==user.getUserId()
+                && username.equals(user.getUsername())
+                && !isTokenExpired(token);
     }
 
     /**
-     * 期限を取得
+     * Tokenを検証
      *
-     * @return Date
+     * @param token token
+     * @return true:有効 false:無効
      */
-    private Date getExpirationDate(){
-        return Date.from(ZonedDateTime.now().plusHours(SecurityConstants.VALIDATE_HOUR).toInstant());
-    }
-
-    /**
-     * Tokenからクレームを取得
-     *
-     * @param token Token
-     * @return クレーム
-     */
-    private Claims getClaimsFromToken(String token) {
-        Claims claims;
+    public boolean validateToken(String token){
         try {
-            claims = Jwts.parser()
+            Jwts.parser()
                     .setSigningKey(SecurityConstants.SECRET)
-                    .parseClaimsJws(token).getBody();
-        } catch (Exception e) {
-            claims = null;
+                    .parseClaimsJws(token);
+            return true;
+        } catch (SignatureException ex) {
+            log.error("Invalid JWT signature");
+        } catch (MalformedJwtException ex) {
+            log.error("Invalid JWT token");
+        } catch (ExpiredJwtException ex) {
+            log.error("Expired JWT token");
+        } catch (UnsupportedJwtException ex) {
+            log.error("Unsupported JWT token");
+        } catch (IllegalArgumentException ex) {
+            log.error("JWT claims string is empty.");
         }
-        return claims;
+        return false;
     }
 
     /**
@@ -124,6 +209,11 @@ public class JwtUtils implements Serializable {
     public Boolean isTokenExpired(String token) {
         try {
             Claims claims = getClaimsFromToken(token);
+            if(claims==null){
+                //TODO
+                log.error("Tokenが期限切れになりました。");
+                throw new RuntimeException("Tokenが空です。");
+            }
             Date expiration = claims.getExpiration();
             return expiration.before(new Date());
         } catch (Exception e) {
@@ -132,49 +222,40 @@ public class JwtUtils implements Serializable {
     }
 
     /**
-     * Tokenを更新
+     * RequestからTokenを取得
      *
-     * @param token 元Token
-     * @return 新Token
+     * @param request request
+     * @return token
      */
-    public String refreshToken(String token) {
-        String refreshedToken;
-        try {
-            Claims claims = getClaimsFromToken(token);
-            claims.put(Claims.ISSUED_AT, new Date());
-            refreshedToken = generateToken(claims);
-        } catch (Exception e) {
-            refreshedToken = null;
+    public String getJwtFromRequest(HttpServletRequest request){
+        String bearerToken = request.getHeader(SecurityConstants.TOKEN_HEADER);
+        if(StringUtils.isNotEmpty(bearerToken) && bearerToken.startsWith("Bearer ")){
+            return bearerToken.substring(7, SecurityConstants.TOKEN_PREFIX.length());
         }
-        return refreshedToken;
+        return null;
     }
 
     /**
-     * Tokenを検証
+     * Tokenをresponseに設定
      *
-     * @param token Token
-     * @param userDetails ユーザ情報
-     * @return true 有効 false 無効
+     * @param response response
+     * @param token token
      */
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        JwtUser user = (JwtUser) userDetails;
-        String username = getUsernameFromToken(token);
-        return (username.equals(user.getUsername()) && !isTokenExpired(token));
+    public void setJwtTokenToResponse(HttpServletResponse response,String token){
+        response.setHeader(SecurityConstants.TOKEN_HEADER,token);
     }
 
-    public boolean validateToken(String token){
-        try {
-            Jwts.parser().setSigningKey(SecurityConstants.SECRET).parseClaimsJws(token);
-            return true;
-        } catch (MalformedJwtException ex) {
-            log.error("Invalid JWT token");
-        } catch (ExpiredJwtException ex) {
-            log.error("Expired JWT token");
-        } catch (UnsupportedJwtException ex) {
-            log.error("Unsupported JWT token");
-        } catch (IllegalArgumentException ex) {
-            log.error("JWT claims string is empty.");
-        }
-        return false;
+    /**
+     * Claimsを作成
+     * @param user jwtUser
+     * @return Claims
+     */
+    private Map<String, Object> generateClaims(JwtUser user){
+        Map<String, Object> claims = new HashMap<>();
+        claims.put(SecurityConstants.CLAIM_KEY_USER_ID, user.getUserId());
+        claims.put(SecurityConstants.CLAIM_KEY_USER_NAME,user.getUsername());
+        claims.put(SecurityConstants.CLAIM_KEY_EMAIL,user.getEmail());
+        claims.put(SecurityConstants.CLAIM_KEY_AUTHORITIES,user.getAuthorities());
+        return claims;
     }
 }

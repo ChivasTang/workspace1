@@ -22,12 +22,12 @@
         Your login attempt was not successful due to <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>.
     </p>
 </c:if>
-<form name='loginForm' action="<c:url value='/admin/login' />" method='POST'>
+<form name='loginForm' action="<c:url value="/login" />" method='POST'>
 Username <input type="text" name="username" title="" /><br />
 Password <input type="password" name="password" title="" /><br />
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /><br />
 <input type="submit" value="Submit"><br />
 </form>
-<a href="<c:url value='/admin/register' />" type="button" role="button">新規登録</a>
+<a href="<c:url value="/admin/register" />" type="button" role="button">新規登録</a>
 </body>
 </html>

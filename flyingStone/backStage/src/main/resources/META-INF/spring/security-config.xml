@@ -7,7 +7,7 @@
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
         http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
     <description>セキュリティ設定</description>
-    <security:global-method-security pre-post-annotations="enabled" proxy-target-class="true"/>
+    <!--<security:global-method-security pre-post-annotations="enabled" proxy-target-class="true"/>-->
 
     <security:http pattern="/login" security="none"/>
     <security:http pattern="/admin/login" security="none"/>
@@ -25,11 +25,11 @@
         <security:intercept-url pattern="/error/denied" access="permitAll()" />
         <security:intercept-url pattern="/**" access="isAuthenticated()" />
         <!-- -->
-        <security:csrf />
+        <security:csrf disabled="false"/>
         <!-- -->
         <security:form-login login-page="/admin/login"
-                             login-processing-url="/admin/login"
-                             default-target-url="/admin/login"
+                             login-processing-url="/login"
+                             default-target-url="/"
                              username-parameter="username"
                              password-parameter="password"
                              authentication-failure-url="/admin/login?error=true"
@@ -67,8 +67,6 @@
 
     <bean id="jwtUserDetailsService" class="com.flyingStone.security.service.impl.JwtUserDetailsServiceImpl" />
     <bean id="jwtUtils" class="com.flyingStone.security.util.JwtUtils" />
-    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-        <constructor-arg name="strength" value="12"/>
-    </bean>
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
     <import resource="app-config.xml"/>
 </beans>

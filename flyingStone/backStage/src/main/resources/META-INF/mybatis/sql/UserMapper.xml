@@ -28,13 +28,14 @@
         WHERE username = #{username,jdbcType=VARCHAR}
         AND del_kbn=0
     </select>
-
-    <!--<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-      select
-      <include refid="Base_Column_List" />
-      from m_user
-      where user_id = #{userId,jdbcType=BIGINT}
+    <select id="selectByUserId" parameterType="com.flyingStone.core.domain.ParamDomain"
+            resultType="com.flyingStone.core.domain.entity.UserEntity">
+        select
+        <include refid="Base_Column_List" />
+        from m_user
+        where user_id = #{userId,jdbcType=BIGINT}
     </select>
+    <!--
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
       delete from m_user
       where user_id = #{userId,jdbcType=BIGINT}

@@ -22,6 +22,7 @@
         <jedis>3.8.1</jedis>
         <spring.security>5.2.0.RELEASE</spring.security>
         <jjwt>0.10.5</jjwt>
+        <jedis>3.1.0</jedis>
         <mybatis>3.5.3</mybatis>
         <mybatis.spring>2.0.3</mybatis.spring>
         <junit>4.12</junit>
@@ -77,12 +78,12 @@
             <version>${mybatis.spring}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.oracle.jdbc/ojdbc6 -->
-<!--        <dependency>-->
-<!--            <groupId>com.oracle.jdbc</groupId>-->
-<!--            <artifactId>ojdbc8</artifactId>-->
-<!--            <version>${oracle.driver}</version>-->
-<!--            <scope>runtime</scope>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.oracle.jdbc</groupId>-->
+        <!--            <artifactId>ojdbc8</artifactId>-->
+        <!--            <version>${oracle.driver}</version>-->
+        <!--            <scope>runtime</scope>-->
+        <!--        </dependency>-->
         <!--mysql -->
         <dependency>
             <groupId>mysql</groupId>
@@ -207,9 +208,16 @@
             <scope>runtime</scope>
         </dependency>
         <!-- redis -->
-        <!-- <dependency> <groupId>org.springframework.data</groupId> <artifactId>spring-data-redis</artifactId>
-            <version>${spring.data.redis}</version> </dependency> <dependency> <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId> <version>${jedis}</version> </dependency> -->
+<!--        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>${spring.data.redis}</version>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis}</version>
+        </dependency>-->
 
         <!-- log4j -->
         <dependency>
@@ -362,11 +370,11 @@
                         <artifactId>mysql-connector-java</artifactId>
                         <version>${mysql}</version>
                     </dependency>
-<!--                    <dependency>-->
-<!--                        <groupId>com.oracle.jdbc</groupId>-->
-<!--                        <artifactId>ojdbc8</artifactId>-->
-<!--                        <version>${oracle.driver}</version>-->
-<!--                    </dependency>-->
+                    <!--                    <dependency>-->
+                    <!--                        <groupId>com.oracle.jdbc</groupId>-->
+                    <!--                        <artifactId>ojdbc8</artifactId>-->
+                    <!--                        <version>${oracle.driver}</version>-->
+                    <!--                    </dependency>-->
                 </dependencies>
                 <configuration>
                     <overwrite>true</overwrite>

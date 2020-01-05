@@ -1,16 +1,11 @@
 package com.flyingStone.security.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.flyingStone.security.domain.JwtUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.flyingStone.core.dao.RoleDao;
 import com.flyingStone.core.dao.UserDao;
@@ -19,16 +14,15 @@ import com.flyingStone.core.domain.entity.RoleEntity;
 import com.flyingStone.core.domain.entity.UserEntity;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
-public class JwtUserDetailsServiceImpl implements UserDetailsService {
+public class JwtUserDetailsServiceImpl implements JwtUserDetailsService {
 
     @Autowired
     private UserDao userDao;
     @Autowired
     private RoleDao roleDao;
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
 
     /**
      * ユーザ名でユーザ情報を取得
@@ -37,6 +31,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
      * @throws UsernameNotFoundException ユーザ存在しない
      */
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         log.debug("Authenticating user '{}'", username);
         // ユーザを検索
@@ -56,15 +51,26 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
             throw new RuntimeException(String.format("No Role found with username '%s'.", username));
         }
         //Authentication情報
-        List<GrantedAuthority> authorities=new ArrayList<>();
-        for (RoleEntity role:roles){
-            authorities.add(new SimpleGrantedAuthority(role.getRole()));
+        return JwtUser.create(user,roles);
+    }
+
+    /**
+     * ユーザIdでユーザ情報を取得
+     * @param userId ユーザId
+     * @return 認証情報
+     * @throws UsernameNotFoundException ユーザ存在しない
+     */
+    @Override
+    public UserDetails loadUserByUserId(Long userId) throws UsernameNotFoundException {
+        // ユーザを検索
+        ParamDomain param=new ParamDomain();
+        param.setId(userId);
+        UserEntity user = userDao.selectByUserId(param);
+        List<RoleEntity> roles=roleDao.selectUserRoles(param);
+        if(roles.size()==0){
+            throw new RuntimeException(String.format("No Role found with username '%s'.", user.getUsername()));
         }
-        String encodedPassword=passwordEncoder.encode("123456");
-        System.out.println(encodedPassword);
-        return User.withUsername(username)
-                .password(passwordEncoder.encode(user.getPassword()))
-                .authorities(authorities) // ユーザの権限
-                .build();
+
+        return JwtUser.create(user,roles);
     }
 }

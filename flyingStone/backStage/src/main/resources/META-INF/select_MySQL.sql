@@ -1,4 +1,5 @@
 SELECT * FROM m_user;
+UPDATE m_user SET password='$2a$10$/R6b5d6aBOBbpCU6J78mHuaN5nEyhXgha4xdu07eNrXk/EapQEJk6' WHERE user_id<>0;
 SELECT * FROM m_role;
 SELECT * FROM r_user_roles;
 SELECT
