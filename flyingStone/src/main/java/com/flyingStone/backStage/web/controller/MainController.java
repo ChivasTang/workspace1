@@ -1,4 +1,4 @@
-package com.flyingStone.web.controller;
+package com.flyingStone.backStage.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
