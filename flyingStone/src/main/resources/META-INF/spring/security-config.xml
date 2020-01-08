@@ -6,31 +6,29 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
         http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
-    <import resource="app-config.xml"/>
+    <import resource="app-config.xml" />
 
     <security:http use-expressions="true" auto-config="false"
                    entry-point-ref="authenticationEntryPoint"
                    authentication-manager-ref="authenticationManager">
-        <security:csrf/>
-
-        <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
-        <security:intercept-url pattern="/admin/login" access="permitAll()"/>
-
+        <security:csrf />
+        <security:intercept-url pattern="/admin/login" access="permitAll()" />
+        <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
         <security:form-login login-page="/admin/login"
                              login-processing-url="/login"
                              default-target-url="/"
                              username-parameter="username"
-                             password-parameter="password" />
+                             password-parameter="password"/>
     </security:http>
 
-    <security:authentication-manager id="authenticationManager" erase-credentials="true">
+    <security:authentication-manager id="authenticationManager">
         <security:authentication-provider user-service-ref="jwtUserDetailsService">
-            <security:password-encoder ref="passwordEncoder"/>
+            <security:password-encoder ref="passwordEncoder" />
         </security:authentication-provider>
     </security:authentication-manager>
 
     <bean id="authenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
-        <constructor-arg name="loginFormUrl" value="/admin/login"/>
+        <constructor-arg name="loginFormUrl" value="/admin/login" />
     </bean>
 
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
