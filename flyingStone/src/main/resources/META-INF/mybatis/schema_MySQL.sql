@@ -193,6 +193,7 @@ CREATE TABLE IF NOT EXISTS flyingStone.r_user_roles
 LOCK TABLES flyingStone.r_user_roles WRITE;
 /*!40000 ALTER TABLE flyingStone.r_user_roles DISABLE KEYS */;
 INSERT INTO flyingStone.r_user_roles (id, user_id, role_id, create_user) VALUES (1, 1,1,'tangzh1983');
+INSERT INTO flyingStone.r_user_roles (id, user_id, role_id, create_user) VALUES (2, 1,2,'tangzh1983');
 /*!40000 ALTER TABLE flyingStone.r_user_roles ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE = @OLD_TIME_ZONE */;

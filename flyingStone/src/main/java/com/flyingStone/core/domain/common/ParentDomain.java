@@ -1,11 +1,12 @@
 package com.flyingStone.core.domain.common;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
-
-@Data
+@Setter
+@Getter
 @ToString(callSuper = true)
 public class ParentDomain {
 
