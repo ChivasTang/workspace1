@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MainController {
 
 	@GetMapping
-	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView main(HttpServletRequest request, HttpServletResponse response, Model model) {
 		log.debug("Main Start...");
 		return new ModelAndView("main");
 	}

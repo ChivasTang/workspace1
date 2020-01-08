@@ -14,26 +14,29 @@ https://www.springframework.org/schema/context/spring-context.xsd">
                                   file-encoding="UTF-8"
                                   order="2"
                                   ignore-unresolvable="true"/>
-                                  
+
     <!-- dataSource -->
-<!--      <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${spring.dataSource.driverClassName}"/>
         <property name="url" value="${spring.dataSource.url}"/>
         <property name="username" value="${spring.dataSource.username}"/>
         <property name="password" value="${spring.dataSource.password}"/>
+        <property name="initialSize" value="${spring.dataSource.initialSize}"/>
+        <property name="maxIdle" value="${spring.dataSource.maxIdle}"/>
+        <property name="maxWaitMillis" value="${spring.dataSource.maxWait}"/>
     </bean>
-     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="configLocation" value="${spring.mybatis.configLocation}"/>
         <property name="mapperLocations" value="${spring.mybatis.mapperLocations}"/>
         <property name="dataSource" ref="dataSource"/>
-    </bean>  
-    
-	<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.flyingStone.*.dao" />
     </bean>
-   
-     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.flyingStone.*.dao"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-     <tx:annotation-driven /> -->
+    <tx:annotation-driven/>
 </beans>

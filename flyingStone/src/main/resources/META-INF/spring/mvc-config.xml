@@ -9,10 +9,25 @@ http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context.xsd
 http://www.springframework.org/schema/mvc
 http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-	
-	<context:component-scan base-package="com.flyingStone" />
-	<mvc:annotation-driven/>
-	
+
+    <context:component-scan base-package="com.flyingStone"/>
+    <mvc:annotation-driven/>
+
+    <!--    <context:annotation-config />-->
+    <!--    <mvc:default-servlet-handler/>-->
+
+    <!-- 访问静态文件（jpg,js,css）的方法 -->
+        <mvc:resources location="WEB-INF/static/js/" mapping="/js/**/**" />
+        <mvc:resources location="WEB-INF/static/css/" mapping="/css/**/**" />
+        <mvc:resources location="WEB-INF/static/img/" mapping="/image/**/**" />
+        <mvc:resources location="WEB-INF/static/i18n/" mapping="/i18n/**/**" />
+
+    <!-- messageSource -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="WEB-INF/static/i18n/MessageSource*.*"/>
+        <property name="defaultEncoding" value="${spring.messageSource.defaultEncoding}"/>
+    </bean>
+
     <!-- viewResolver -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="cache" value="${spring.viewResolver.cache}"/>
@@ -20,6 +35,6 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
         <property name="prefix" value="${spring.viewResolver.prefix}"/>
         <property name="suffix" value="${spring.viewResolver.suffix}"/>
     </bean>
-    
+
     <import resource="security-config.xml"/>
 </beans>
