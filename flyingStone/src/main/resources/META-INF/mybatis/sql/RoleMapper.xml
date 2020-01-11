@@ -14,7 +14,7 @@
     <sql id="Base_Column_List">
         role_id, role, role_name, create_user, create_date, update_user, update_date, del_kbn
     </sql>
-    <select id="getRolesByUserId" parameterType="com.flyingStone.core.domain.common.ParamDomain"
+    <select id="selectUserRoles" parameterType="com.flyingStone.core.domain.common.ParamDomain"
             resultType="com.flyingStone.core.domain.entity.RoleEntity">
         SELECT
         rur.role_id
@@ -26,138 +26,15 @@
         , mr.update_date
         , mr.del_kbn
         FROM r_user_roles rur
-        LEFT JOIN m_user mu ON rur.user_id = mu.user_id
-        LEFT JOIN m_role mr ON rur.role_id = mr.role_id
-        WHERE rur.user_id = #{id}
-        AND rur.del_kbn = 0
-        AND mu.del_kbn = 0
-        AND mr.del_kbn = 0
+        LEFT JOIN m_user mu ON rur.user_id=mu.user_id
+        LEFT JOIN m_role mr ON rur.role_id=mr.role_id
+        WHERE rur.user_id=#{id,jdbcType=BIGINT}
+        AND rur.del_kbn=0
+        AND mu.del_kbn=0
+        AND mr.del_kbn=0
+        ORDER BY rur.role_id ASC
     </select>
     <!--<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-      select
-      <include refid="Base_Column_List" />
-      from m_role
-      where role_id = #{roleId,jdbcType=BIGINT}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-      delete from m_role
-      where role_id = #{roleId,jdbcType=BIGINT}
-    </delete>
-    <insert id="insert" parameterType="com.flyingStone.core.domain.entity.RoleEntity">
-      insert into m_role (role_id, role, role_name,
-        create_user, create_date, update_user,
-        update_date, del_kbn)
-      values (#{roleId,jdbcType=BIGINT}, #{role,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR},
-        #{createUser,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR},
-        #{updateDate,jdbcType=TIMESTAMP}, #{delKbn,jdbcType=BIT})
-    </insert>
-    <insert id="insertSelective" parameterType="com.flyingStone.core.domain.entity.RoleEntity">
-      insert into m_role
-      <trim prefix="(" suffix=")" suffixOverrides=",">
-        <if test="roleId != null">
-          role_id,
-        </if>
-        <if test="role != null">
-          role,
-        </if>
-        <if test="roleName != null">
-          role_name,
-        </if>
-        <if test="createUser != null">
-          create_user,
-        </if>
-        <if test="createDate != null">
-          create_date,
-        </if>
-        <if test="updateUser != null">
-          update_user,
-        </if>
-        <if test="updateDate != null">
-          update_date,
-        </if>
-        <if test="delKbn != null">
-          del_kbn,
-        </if>
-      </trim>
-      <trim prefix="values (" suffix=")" suffixOverrides=",">
-        <if test="roleId != null">
-          #{roleId,jdbcType=BIGINT},
-        </if>
-        <if test="role != null">
-          #{role,jdbcType=VARCHAR},
-        </if>
-        <if test="roleName != null">
-          #{roleName,jdbcType=VARCHAR},
-        </if>
-        <if test="createUser != null">
-          #{createUser,jdbcType=VARCHAR},
-        </if>
-        <if test="createDate != null">
-          #{createDate,jdbcType=TIMESTAMP},
-        </if>
-        <if test="updateUser != null">
-          #{updateUser,jdbcType=VARCHAR},
-        </if>
-        <if test="updateDate != null">
-          #{updateDate,jdbcType=TIMESTAMP},
-        </if>
-        <if test="delKbn != null">
-          #{delKbn,jdbcType=BIT},
-        </if>
-      </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.flyingStone.core.domain.entity.RoleEntity">
-      update m_role
-      <set>
-        <if test="role != null">
-          role = #{role,jdbcType=VARCHAR},
-        </if>
-        <if test="roleName != null">
-          role_name = #{roleName,jdbcType=VARCHAR},
-        </if>
-        <if test="createUser != null">
-          create_user = #{createUser,jdbcType=VARCHAR},
-        </if>
-        <if test="createDate != null">
-          create_date = #{createDate,jdbcType=TIMESTAMP},
-        </if>
-        <if test="updateUser != null">
-          update_user = #{updateUser,jdbcType=VARCHAR},
-        </if>
-        <if test="updateDate != null">
-          update_date = #{updateDate,jdbcType=TIMESTAMP},
-        </if>
-        <if test="delKbn != null">
-          del_kbn = #{delKbn,jdbcType=BIT},
-        </if>
-      </set>
-      where role_id = #{roleId,jdbcType=BIGINT}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.flyingStone.core.domain.entity.RoleEntity">
-      update m_role
-      set role = #{role,jdbcType=VARCHAR},
-        role_name = #{roleName,jdbcType=VARCHAR},
-        create_user = #{createUser,jdbcType=VARCHAR},
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-        update_user = #{updateUser,jdbcType=VARCHAR},
-        update_date = #{updateDate,jdbcType=TIMESTAMP},
-        del_kbn = #{delKbn,jdbcType=BIT}
-      where role_id = #{roleId,jdbcType=BIGINT}
-    </update>
-    <resultMap id="BaseResultMap" type="com.flyingStone.core.domain.entity.RoleEntity">
-      <id column="role_id" jdbcType="BIGINT" property="roleId" />
-      <result column="role" jdbcType="VARCHAR" property="role" />
-      <result column="role_name" jdbcType="VARCHAR" property="roleName" />
-      <result column="create_user" jdbcType="VARCHAR" property="createUser" />
-      <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-      <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
-      <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
-      <result column="del_kbn" jdbcType="BIT" property="delKbn" />
-    </resultMap>
-    <sql id="Base_Column_List">
-      role_id, role, role_name, create_user, create_date, update_user, update_date, del_kbn
-    </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
       select
       <include refid="Base_Column_List" />
       from m_role

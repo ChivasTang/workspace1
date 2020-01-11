@@ -1,14 +1,16 @@
 package com.flyingStone.security.domain;
 
-import com.flyingStone.core.domain.common.ParentDomain;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.flyingStone.core.domain.common.ParentDomain;
+
 public class JwtUser extends ParentDomain implements UserDetails {
-    private Long userId;
+	private static final long serialVersionUID = 1L;
+	private Long userId;
     private String username;
     private String password;
     List<GrantedAuthority> authorities;

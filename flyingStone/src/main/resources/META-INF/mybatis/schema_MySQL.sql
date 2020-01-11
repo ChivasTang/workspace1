@@ -133,10 +133,10 @@ CREATE TABLE IF NOT EXISTS flyingStone.m_user
     username    VARCHAR(255) NOT NULL UNIQUE COMMENT 'ユーザ名',
     email       VARCHAR(255) NOT NULL UNIQUE COMMENT 'イーメール',
     password    VARCHAR(255) NOT NULL COMMENT 'パスワード',
-    first_name  VARCHAR(255) NOT NULL COMMENT '名前',
-    last_name   VARCHAR(255) NOT NULL COMMENT '苗字',
-    birthday    DATE         NOT NULL COMMENT '生年月日',
-    create_user VARCHAR(255) NOT NULL COMMENT '作成ユーザ',
+    first_name  VARCHAR(255) DEFAULT NULL COMMENT '名前',
+    last_name   VARCHAR(255) DEFAULT NULL COMMENT '苗字',
+    birthday    DATE         DEFAULT NULL COMMENT '生年月日',
+    create_user VARCHAR(255) DEFAULT NULL COMMENT '作成ユーザ',
     create_date     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP COMMENT '作成日付',
     update_user VARCHAR(255) DEFAULT NULL COMMENT '更新ユーザ',
     update_date     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日付',
@@ -153,10 +153,9 @@ CREATE TABLE IF NOT EXISTS flyingStone.m_user
 
 LOCK TABLES flyingStone.m_user WRITE;
 /*!40000 ALTER TABLE flyingStone.m_user DISABLE KEYS */;
-INSERT INTO flyingStone.m_user
-(username, email, password, first_name, last_name, birthday, create_user)
-VALUES ('tangzh1983', 'tangzh1983@gmail.com','1c9078915870690b6dae37a57cf7b43e64763f32e1932fbc6d1e3ba37abc4260b97ee4046fcd4575', '湯', '志華', '1983-11-20','tangzh1983'),
-       ('tangzhihua', 'tangzhihua1983@i.softbank.jp','883863d54bc59d1df9447abf694bae0584da482a2c8c6d744df75dedf94c5f5a0d2e840d0cfbf191', '湯', '志華', '1983-11-20','tangzh1983');
+-- INSERT INTO flyingStone.m_user (username, email, password, first_name, last_name, birthday, create_user)
+-- VALUES ('tangzh1983', 'tangzh1983@gmail.com','1c9078915870690b6dae37a57cf7b43e64763f32e1932fbc6d1e3ba37abc4260b97ee4046fcd4575', '湯', '志華', '1983-11-20','tangzh1983'),
+--        ('tangzhihua', 'tangzhihua1983@i.softbank.jp','883863d54bc59d1df9447abf694bae0584da482a2c8c6d744df75dedf94c5f5a0d2e840d0cfbf191', '湯', '志華', '1983-11-20','tangzh1983');
 /*!40000 ALTER TABLE flyingStone.m_user ENABLE KEYS */;
 UNLOCK TABLES;
 

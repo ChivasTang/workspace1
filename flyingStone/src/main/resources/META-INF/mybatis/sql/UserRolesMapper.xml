@@ -15,7 +15,7 @@
     id, user_id, role_id, create_user, create_date, update_user, update_date, del_kbn
   </sql>
   <!--<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from r_user_roles
     where id = #{id,jdbcType=BIGINT}
@@ -25,11 +25,11 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.flyingStone.core.domain.entity.UserRolesEntity">
-    insert into r_user_roles (id, user_id, role_id, 
-      create_user, create_date, update_user, 
+    insert into r_user_roles (id, user_id, role_id,
+      create_user, create_date, update_user,
       update_date, del_kbn)
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, 
-      #{createUser,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT},
+      #{createUser,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR},
       #{updateDate,jdbcType=TIMESTAMP}, #{delKbn,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.flyingStone.core.domain.entity.UserRolesEntity">

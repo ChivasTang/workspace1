@@ -1,5 +1,5 @@
 SELECT * FROM m_user;
-UPDATE m_user SET password='$2a$10$/R6b5d6aBOBbpCU6J78mHuaN5nEyhXgha4xdu07eNrXk/EapQEJk6' WHERE user_id<>0;
+UPDATE m_user SET password='$2a$10$v9viO5ZY4xkXuRRUhMJW8.kon08Y38Bf8G8dExo9yv2hAIS1cPFSa' WHERE user_id=1;
 SELECT * FROM m_role;
 SELECT * FROM r_user_roles;
 SELECT

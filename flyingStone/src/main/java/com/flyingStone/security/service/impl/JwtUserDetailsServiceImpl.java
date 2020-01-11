@@ -3,6 +3,14 @@ package com.flyingStone.security.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import com.flyingStone.core.dao.RoleDao;
 import com.flyingStone.core.dao.UserDao;
 import com.flyingStone.core.domain.common.AuthDomain;
@@ -11,14 +19,6 @@ import com.flyingStone.core.domain.entity.RoleEntity;
 import com.flyingStone.core.domain.entity.UserEntity;
 import com.flyingStone.security.domain.JwtUser;
 import com.flyingStone.security.service.JwtUserDetailsService;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,19 +31,10 @@ public class JwtUserDetailsServiceImpl implements JwtUserDetailsService {
     @Autowired
     private RoleDao roleDao;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
-    public JwtUserDetailsServiceImpl(BCryptPasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     	AuthDomain auth=getAuthDomainByUsername(username);
-        String password=passwordEncoder.encode(auth.getUser().getPassword());
-        System.out.println(password);
-        return new User(username,password,true,true,true,true,auth.getAuthorities());
+        return new User(username,auth.getUser().getPassword(),true,true,true,true,auth.getAuthorities());
     }
 
     @Override
@@ -79,7 +70,7 @@ public class JwtUserDetailsServiceImpl implements JwtUserDetailsService {
         if(paramDomain.getId()==null || paramDomain.getId()==0L){
             throw new RuntimeException("No Id error...");
         }
-        List<RoleEntity> roles=roleDao.getRolesByUserId(paramDomain);
+        List<RoleEntity> roles=roleDao.selectUserRoles(paramDomain);
         if(roles.size()<1){
             throw new RuntimeException("Roles not found...");
         }
