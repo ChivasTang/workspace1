@@ -1,3 +1,32 @@
+.hidden{
+    display: none;
+}
+
+header {
+    margin: 0;
+    font-size: 20px;
+    color: #fff;
+    background-color: #272727;
+}
+
+header h1,
+header button {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+header .container h1, .container h1 {
+    margin: 0;
+    font-size: 21px;
+    line-height: 65px;
+    padding-top: 20px;
+    padding-left: 0;
+}
+
+header h1 sup {
+    font-size: .6em;
+}
+
 .fieldlist {
     margin: 0 0 -2em;
     padding: 0;

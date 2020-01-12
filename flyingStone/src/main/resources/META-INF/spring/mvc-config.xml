@@ -36,5 +36,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
         <property name="suffix" value="${spring.viewResolver.suffix}"/>
     </bean>
 
+    <bean id="userService" class="com.flyingStone.security.service.impl.UserServiceImpl"/>
+
     <import resource="security-config.xml"/>
 </beans>

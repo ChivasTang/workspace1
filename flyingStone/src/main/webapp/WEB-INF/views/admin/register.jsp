@@ -17,11 +17,12 @@
     <link type="text/css" rel="stylesheet" href="<c:url value="/lib/kendo/dist/styles/kendo.common.min.css" />" media="all"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/lib/kendo/dist/styles/kendo.bootstrap-v4.min.css" />" media="all"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/css/common.css" />" media="all"/>
-    <link type="text/css" rel="stylesheet" href="<c:url value="/css/site.css" />" media="all"/>
+
     <script type="text/javascript" src="<c:url value="/lib/kendo/dist/js/jquery.min.js" />" charset="UTF-8"></script>
     <script type="text/javascript" src="<c:url value="/lib/kendo/dist/js/kendo.all.min.js" />" charset="UTF-8"></script>
     <script type="text/javascript" src="<c:url value="/lib/bootstrap/dist/js/bootstrap.min.js" />" charset="UTF-8"></script>
 
+    <link href="<c:url value="/lib/ikki/dist/img/favicon.png" />" rel="icon" type="image/png">
 </head>
 <body>
 <header>
@@ -32,11 +33,10 @@
 
 <div class="container">
     <div class="content">
-        <form id="registerForm" name="registerForm" class="form" method="POST" action="${pageContext.request.contextPath}/admin/register">
+        <form name="registerForm" class="form" method="POST" action="<%=request.getContextPath()%>/admin/register">
             <div class="k-header">
                 <h1 class="k-title">新規登録</h1>
             </div>
-
             <div class="error">
                 <c:if test="${not empty error}">
                     <div class="error">${error}</div>
@@ -48,23 +48,23 @@
             <ul class="fieldlist">
                 <li>
                     <label class="k-label" for="username">ユーザ名</label>
-                    <input id="username" type="text" class="k-textbox" style="width: 60%;" />
+                    <input id="username" name="username" type="text" class="k-textbox" style="width: 60%;"/>
                 </li>
                 <li>
                     <div style="width: 100%;display: flex;">
                         <label class="k-label" for="password" style="width: 30%;">パースワード</label>
                         <label class="k-label" for="confirmPassword" style="width: 30%;">パースワード確認</label>
                     </div>
-                    <input id="password" type="password" class="k-textbox" style="width: 30%;" />
-                    <input id="confirmPassword" type="password" class="k-textbox" style="width: 30%;" />
+                    <input id="password" name="password" type="password" class="k-textbox" style="width: 30%;"/>
+                    <input id="confirmPassword" name="confirmPassword" type="password" class="k-textbox" style="width: 30%;"/>
                 </li>
                 <li>
                     <label class="k-label" for="email">Email</label>
-                    <input id="email" type="email" class="k-textbox" style="width: 60%;" />
+                    <input id="email" name="email" type="email" class="k-textbox" style="width: 60%;"/>
                 </li>
                 <li>
-                    <button class="k-button k-primary" type="submit">新規登録</button>&nbsp;
-                    <a class="k-button" role="button" href="${pageContext.request.contextPath}/admin/login">ログイン</a>
+                    <button class="k-button k-primary" type="submit">新規登録</button>
+                    <a class="k-button" role="button" href="<%=request.getContextPath()%>/admin/login">ログイン</a>
                 </li>
             </ul>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

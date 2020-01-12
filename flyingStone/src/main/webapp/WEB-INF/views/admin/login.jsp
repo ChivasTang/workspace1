@@ -16,10 +16,12 @@
     <link type="text/css" rel="stylesheet" href="<c:url value="/lib/kendo/dist/styles/kendo.common.min.css" />" media="all"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/lib/kendo/dist/styles/kendo.bootstrap-v4.min.css" />" media="all"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/css/common.css" />" media="all"/>
-    <link type="text/css" rel="stylesheet" href="<c:url value="/css/site.css" />" media="all"/>
+
     <script type="text/javascript" src="<c:url value="/lib/kendo/dist/js/jquery.min.js" />" charset="UTF-8"></script>
     <script type="text/javascript" src="<c:url value="/lib/kendo/dist/js/kendo.all.min.js" />" charset="UTF-8"></script>
     <script type="text/javascript" src="<c:url value="/lib/bootstrap/dist/js/bootstrap.min.js" />" charset="UTF-8"></script>
+
+    <link href="<c:url value="/lib/ikki/dist/img/favicon.png" />" rel="icon" type="image/png">
 </head>
 <body>
 <header>
@@ -30,7 +32,7 @@
 
 <div class="container">
     <div class="content">
-        <form id="loginForm" name="loginForm" class="form" method="post" action="${pageContext.request.contextPath}/login">
+        <form name="loginForm" class="form" method="POST" action="<%=request.getContextPath()%>/login">
             <div class="k-header">
                 <h1 class="k-title">ログインForm</h1>
             </div>
@@ -46,15 +48,15 @@
             <ul class="fieldlist">
                 <li>
                     <label for="username">ユーザ名</label>
-                    <input id="username" type="text" class="k-textbox" style="width: 40%;" />
+                    <input id="username" name="username" type="text" class="k-textbox" style="width: 40%;" />
                 </li>
                 <li>
                     <label for="password">パースワード</label>
-                    <input id="password" type="password" class="k-textbox" style="width: 40%;" />
+                    <input id="password" name="password" type="password" class="k-textbox" style="width: 40%;" />
                 </li>
                 <li>
                     <button class="k-button k-primary" type="submit">ログイン</button>&nbsp;
-                    <a class="k-button" role="button" href="${pageContext.request.contextPath}/admin/register">新規登録</a>
+                    <a class="k-button" role="button" href="<%=request.getContextPath()%>/admin/register">新規登録</a>
                 </li>
             </ul>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

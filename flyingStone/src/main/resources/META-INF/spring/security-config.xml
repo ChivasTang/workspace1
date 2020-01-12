@@ -8,13 +8,6 @@
         http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
     <import resource="app-config.xml" />
 
-<!--    <security:http security="none" pattern="/admin/register" />
-	<security:http security="none" pattern="/css/**" />
-	<security:http security="none" pattern="/i18n/**" />
-	<security:http security="none" pattern="/img/**" />
-	<security:http security="none" pattern="/js/**" />
-	<security:http security="none" pattern="/lib/**" />-->
-
     <security:http use-expressions="true" auto-config="false"
                    entry-point-ref="authenticationEntryPoint"
                    authentication-manager-ref="authenticationManager">
