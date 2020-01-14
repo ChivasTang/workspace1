@@ -19,6 +19,7 @@
         <security:intercept-url pattern="/img/**" access="permitAll()" />
         <security:intercept-url pattern="/js/**" access="permitAll()" />
         <security:intercept-url pattern="/lib/**" access="permitAll()" />
+        <security:intercept-url pattern="/fonts/**" access="permitAll()" />
         <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 
         <security:form-login login-page="/admin/login"

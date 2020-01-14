@@ -21,15 +21,103 @@ CREATE DATABASE IF NOT EXISTS flyingStone DEFAULT CHARACTER SET utf8;
 USE flyingStone;
 
 -- -----------------------------------------------------
+-- Table flyingStone.t_root_permission
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS flyingStone.t_root_permission;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE flyingStone.t_root_permission (
+    root_permission_id BIGINT NOT NULL AUTO_INCREMENT COMMENT 'root_permission_id',
+    icon VARCHAR(255) NOT NULL COMMENT 'icon名',
+    code VARCHAR(255) NOT NULL COMMENT '多言語用コード',
+    emoji VARCHAR(255) NOT NULL COMMENT '絵文字',
+    encoded TINYINT(1) DEFAULT 0 COMMENT 'エンコード可否',
+    expanded TINYINT(1) DEFAULT 0 COMMENT '展開可否',
+    create_user VARCHAR(255) NOT NULL COMMENT '作成ユーザ',
+    create_date     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP COMMENT '作成日付',
+    update_user VARCHAR(255) DEFAULT NULL COMMENT '更新ユーザ',
+    update_date     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日付',
+    del_kbn   TINYINT(1)   DEFAULT 0 COMMENT '有効区分',
+    PRIMARY KEY (root_permission_id)
+)
+    ENGINE = InnoDB
+    DEFAULT CHARSET = utf8
+    COLLATE = utf8_bin
+    AUTO_INCREMENT = 1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- Dumping data for table flyingStone.t_root_permission
+
+LOCK TABLES flyingStone.t_root_permission WRITE;
+/*!40000 ALTER TABLE flyingStone.t_root_permission DISABLE KEYS */;
+
+INSERT INTO t_root_permission
+    (root_permission_id, icon, code, emoji, encoded, expanded, create_user)
+    VALUES
+    (1,'fas fa-calendar-alt','勤務関連','\uD83D\uDD54',0,1,'admin'),
+    (2,'fas fa-object-group','事務関連','\uD83C\uDF38',0,1,'admin'),
+    (3,'fas fa-cubes','社員管理','\uD83C\uDFAF',0,1,'admin'),
+    (4,'fas fa-columns','業界動向','\uD83C\uDF0C',0,1,'admin');
+/*!40000 ALTER TABLE flyingStone.t_root_permission ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE = @OLD_TIME_ZONE */;
+
+
+-- -----------------------------------------------------
+-- Table flyingStone.t_parent_permission
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS flyingStone.t_parent_permission;
+/*!40101 SET @saved_cs_client = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE flyingStone.t_parent_permission (
+    parent_permission_id BIGINT NOT NULL AUTO_INCREMENT COMMENT 'parent_permission_id',
+    root_permission_id BIGINT NOT NULL COMMENT 'root_permission_id',
+    icon VARCHAR(255) NOT NULL COMMENT 'icon名',
+    code VARCHAR(255) NOT NULL COMMENT '多言語用コード',
+    cssClass VARCHAR(255) NOT NULL COMMENT 'カスタマ外観',
+    encoded TINYINT(1) DEFAULT 0 COMMENT 'エンコード可否',
+    expanded TINYINT(1) DEFAULT 0 COMMENT '展開可否',
+    create_user VARCHAR(255) NOT NULL COMMENT '作成ユーザ',
+    create_date     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP COMMENT '作成日付',
+    update_user VARCHAR(255) DEFAULT NULL COMMENT '更新ユーザ',
+    update_date     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日付',
+    del_kbn   TINYINT(1)   DEFAULT 0 COMMENT '有効区分',
+    PRIMARY KEY (parent_permission_id)
+)
+    ENGINE = InnoDB
+    DEFAULT CHARSET = utf8
+    COLLATE = utf8_bin
+    AUTO_INCREMENT = 1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- Dumping data for table flyingStone.t_parent_permission
+
+LOCK TABLES flyingStone.t_parent_permission WRITE;
+/*!40000 ALTER TABLE flyingStone.t_parent_permission DISABLE KEYS */;
+
+
+/*!40000 ALTER TABLE flyingStone.t_parent_permission ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE = @OLD_TIME_ZONE */;
+
+
+
+-- -----------------------------------------------------
 -- Table flyingStone.t_permission
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS flyingStone.t_permission;
 /*!40101 SET @saved_cs_client = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE flyingStone.t_permission (
-    permission_id BIGINT NOT NULL AUTO_INCREMENT COMMENT 'id',
-    permission_name VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT 'ログイン可能名',
-    permission_code VARCHAR(255) NOT NULL COMMENT 'ログイン可能コード',
+    permission_id BIGINT NOT NULL AUTO_INCREMENT COMMENT 'permission_id',
+    parent_permission_id BIGINT NOT NULL COMMENT 'parent_permission_id',
+    root_permission_id BIGINT NOT NULL COMMENT 'root_permission_id',
+    icon VARCHAR(255) DEFAULT NULL COMMENT 'icon名',
+    code VARCHAR(255) NOT NULL COMMENT 'Nav名称コード',
+    encoded TINYINT(1) DEFAULT 0 COMMENT 'エンコード可否',
+    cssClass VARCHAR(255) NOT NULL COMMENT 'カスタマ外観',
+    link VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'リンク',
+    type VARCHAR(255) NOT NULL COMMENT 'リンクタイプ',
     create_user VARCHAR(255) NOT NULL COMMENT '作成ユーザ',
     create_date     TIMESTAMP    DEFAULT CURRENT_TIMESTAMP COMMENT '作成日付',
     update_user VARCHAR(255) DEFAULT NULL COMMENT '更新ユーザ',
@@ -47,12 +135,12 @@ CREATE TABLE flyingStone.t_permission (
 
 LOCK TABLES flyingStone.t_permission WRITE;
 /*!40000 ALTER TABLE flyingStone.t_permission DISABLE KEYS */;
-insert  into flyingStone.t_permission(permission_id, permission_name, permission_code, create_user) values
-(1,'ユーザ一覧','USER_LIST','tangzh1983'),
-(2,'ユーザ追加','USER_ADD','tangzh1983');
+
+
 /*!40000 ALTER TABLE flyingStone.t_permission ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE = @OLD_TIME_ZONE */;
+
 
 -- -----------------------------------------------------
 -- Table flyingStone.m_role
@@ -153,9 +241,8 @@ CREATE TABLE IF NOT EXISTS flyingStone.m_user
 
 LOCK TABLES flyingStone.m_user WRITE;
 /*!40000 ALTER TABLE flyingStone.m_user DISABLE KEYS */;
--- INSERT INTO flyingStone.m_user (username, email, password, first_name, last_name, birthday, create_user)
--- VALUES ('tangzh1983', 'tangzh1983@gmail.com','1c9078915870690b6dae37a57cf7b43e64763f32e1932fbc6d1e3ba37abc4260b97ee4046fcd4575', '湯', '志華', '1983-11-20','tangzh1983'),
---        ('tangzhihua', 'tangzhihua1983@i.softbank.jp','883863d54bc59d1df9447abf694bae0584da482a2c8c6d744df75dedf94c5f5a0d2e840d0cfbf191', '湯', '志華', '1983-11-20','tangzh1983');
+
+
 /*!40000 ALTER TABLE flyingStone.m_user ENABLE KEYS */;
 UNLOCK TABLES;
 
