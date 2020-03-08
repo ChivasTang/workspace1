@@ -4,6 +4,7 @@
 // GMTWF2NTTC_Ajax_Training
 var GMTWF2NTTC_Ajax_Training = Class.create();
 GMTWF2NTTC_Ajax_Training.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
     //(5)ユーザマスタをsys_idで検索し、部門を返す
     getUserDepartment: function () {
         var userSysID = this.getParameter('sysparm_user_sysid');
@@ -16,5 +17,6 @@ GMTWF2NTTC_Ajax_Training.prototype = Object.extendsObject(global.AbstractAjaxPro
             item.setAttribute('tel', myGR.phone);
         }
     },
+
     type: 'GMTWF2NTTC_Ajax_Training'
 });

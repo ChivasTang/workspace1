@@ -23,22 +23,22 @@ GMTWF2NTTC_Com_Training.prototype = {
             return false;
         }
     },
+
     //読込権限の判定
     getRightRead: function (current) {
         if (current.isNewRecord()) {
             return true;
-        } else if (gs.getUser().getID() == current.u_applicant_id ||
-            gs.getUser().getID() == current.u_assigned_to ||
+        } else if (gs.getUser().getID() == current.u_applicant_id || gs.getUser().getID() == current.u_assigned_to ||
             this._chkUserInclude(current.u_worker_list)) {
             return true;
         } else if (gs.hasRole('x_com_training.main_dept')) {
             return true;
-        } else if (current.u_applicant_department.toString() ==
-            this._getUserDepartment(gs.getUser().getID())) {
+        } else if (current.u_applicant_department.toString() == this._getUserDepartment(gs.getUser().getID())) {
             return true;
         }
         return false;
     },
+
     //編集権限の判定
     getRightWrite: function (current) {
         if (current.isNewRecord()) {
@@ -58,6 +58,7 @@ GMTWF2NTTC_Com_Training.prototype = {
         }
         return false;
     },
+
     //指定したユーザーの部門を取得
     _getUserDepartment: function (userSysID) {
         var myGR = new GlideRecord('sys_user');
@@ -68,11 +69,12 @@ GMTWF2NTTC_Com_Training.prototype = {
         }
         return "";
     },
+
     //ログインユーザーがリストに含まれているかの判定
     _chkUserInclude: function (userList) {
         var list = userList.split(',');
         for (var i = 0; i < list.length; i++) {
-            if (list[i] == gs.getUser().getID()) {
+            if (list[i] == gs.getUser().getID().toString()) {
                 return true;
             }
         }
