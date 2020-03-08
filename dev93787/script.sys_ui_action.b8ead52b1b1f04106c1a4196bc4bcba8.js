@@ -2,8 +2,7 @@
 // テーブル:x_468885_training
 // デスクトップ
 // btnToApproval
-var myGR;
-myGR = new GlideRecord('sysapproval_approver');
+var myGR = new GlideRecord('sysapproval_approver');
 myGR.addQuery('sysapproval', current.sys_id.toString());
 myGR.addQuery('state', 'requested');
 myGR.addQuery('approver', gs.getUserID());
