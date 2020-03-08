@@ -5,10 +5,6 @@
 var GMTWF2NTTC_Com_Training = Class.create();
 GMTWF2NTTC_Com_Training.prototype = {
 
-    getDispCreateBtn: function () {
-        return document.getElementById('user_info_dropdown').getElementsByTagName('div')[1].getAttribute('profile').includes("f3af19561b1700106c1a4196bc4bcb47");
-    },
-
     //承認画面へボタンの表示判定
     getDispApprovalBtn: function (current) {
         if (current.u_status_display == 20) {
@@ -28,8 +24,7 @@ GMTWF2NTTC_Com_Training.prototype = {
     getRightRead: function (current) {
         if (current.isNewRecord()) {
             return true;
-        } else if (gs.getUser().getID() == current.u_applicant_id || gs.getUser().getID() == current.u_assigned_to ||
-            this._chkUserInclude(current.u_worker_list)) {
+        } else if (gs.getUser().getID() == current.u_applicant_id || gs.getUser().getID() == current.u_assigned_to || this._chkUserInclude(current.u_worker_list)) {
             return true;
         } else if (gs.hasRole('x_com_training.main_dept')) {
             return true;
