@@ -4,6 +4,7 @@
 // page_ready
 (function executeRule(current, previous) {
     var myGR;
+
     //(1)申請者所属の取得
     if (current.isNewRecord()) {
         myGR = new GlideRecord('sys_user');
@@ -38,7 +39,9 @@
     while (myGR.next()) {
         list.push(myGR.user.toString());
     }
+
     gslog(g_scratchpad);
     gslog(list);
+
     g_scratchpad.worker_list = list;
 })(current, previous);
