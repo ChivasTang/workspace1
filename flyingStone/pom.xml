@@ -24,7 +24,7 @@
         <jjwt>0.9.1</jjwt>
         <mybatis>3.5.3</mybatis>
         <mybatis.spring>2.0.3</mybatis.spring>
-        <junit>4.12</junit>
+        <junit>4.13.1</junit>
         <lombok>1.18.10</lombok>
         <oracle.driver>19.3.0.0</oracle.driver>
         <mysql>5.1.47</mysql>
